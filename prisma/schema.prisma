@@ -13,3 +13,25 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model DailyMonitoring {
+  id            String   @id @default(uuid())
+  userId        String
+  date          DateTime @default(now())
+  glucoseLevel  Float
+  bloodPressure Float
+  cholesterol   Float
+  uricAcid      Float
+
+  user          UserProfile @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@unique([userId, date]) // optional: hanya 1 input per hari per user
+}
+
+model UserProfile {
+  userId String @id // didapat dari Stack Auth (misal dari getUserDetails)
+  height Float
+  weight Float
+
+  monitorings DailyMonitoring[]
+}

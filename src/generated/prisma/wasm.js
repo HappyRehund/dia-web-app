@@ -120,9 +120,36 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.DailyMonitoringScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  glucoseLevel: 'glucoseLevel',
+  bloodPressure: 'bloodPressure',
+  cholesterol: 'cholesterol',
+  uricAcid: 'uricAcid'
+};
+
+exports.Prisma.UserProfileScalarFieldEnum = {
+  userId: 'userId',
+  height: 'height',
+  weight: 'weight'
+};
+
+exports.Prisma.SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 
 exports.Prisma.ModelName = {
-
+  DailyMonitoring: 'DailyMonitoring',
+  UserProfile: 'UserProfile'
 };
 
 /**

@@ -44,8 +44,8 @@ export default function MessageWindow({ history }: MessageWindowProps) {
                             px-4 py-2 shadow-sm rounded-lg
                             ${
                               isUser
-                                ? "bg-secondary text-white rounded-br-none"
-                                : "bg-gray-600 text-white rounded-bl-none"
+                                ? "bg-secondary text-white rounded-tr-none rounded-br-xl rounded-tl-xl rounded-bl-xl" 
+                                : "bg-gray-600 text-white rounded-tl-none rounded-br-xl rounded-tr-xl rounded-bl-xl"
                             }
                             max-w-xs sm:max-w-md
                             `}

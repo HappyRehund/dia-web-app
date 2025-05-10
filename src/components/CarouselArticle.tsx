@@ -55,7 +55,7 @@ function CarouselArticle({ article }: { article: Article[] }) {
 const Card = ({ slug, title, description }: Article) => {
   return (
     <main className="relative grid h-72 grid-rows-[1fr,auto] overflow-hidden rounded-2xl bg-white shadow-lg">
-      <section className="relative flex w-full flex-col justify-end gap-0.5 overflow-hidden bg-neutral-200 transition-all duration-300 ease-in-out">
+      <section className="relative flex w-full flex-col justify-end overflow-hidden bg-neutral-200 transition-all duration-300 ease-in-out">
         <Image
           src={`/article/${slug}.webp`}
           alt={title}

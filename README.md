@@ -2,7 +2,28 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, install Dependencies: 
+```bash
+npm install
+```
+Then, Set Up Prisma:
+```bash
+npm install prisma --save-dev
+npm install @prisma/client
+npx prisma init
+npx prisma generate
+```
+This will:
+
+    Create a prisma/ directory with a schema.prisma file.
+
+    Set up .env for your database connection string.
+
+    Generate the Prisma client for querying the database.
+
+⚠️ Don't forget to update your DATABASE_URL inside .env.
+
+Then, run the development server:
 
 ```bash
 npm run dev

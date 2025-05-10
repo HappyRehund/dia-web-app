@@ -8,11 +8,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { Footprints, HeartPulse, Menu } from "lucide-react";
+import { HeartPulse, Menu } from "lucide-react";
 import Link from "next/link";
 import { Button, buttonVariants } from "./ui/button";
 import { stackServerApp } from "@/stack";
-import { getUserDetails } from "@/actions/user.action";
 import { UserButton } from "@stackframe/stack";
 
 const NAVBAR_ITEMS = [

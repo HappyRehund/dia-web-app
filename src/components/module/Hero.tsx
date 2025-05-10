@@ -81,7 +81,7 @@ function Hero() {
                   height={48}
                   className="object-cover"
                 />
-                <span className="mt-1 text-xs md:text-base font-medium text-gray-900 group-hover:text-secondary text-center">
+                <span className="mt-1 text-xs lg:text-base font-medium text-gray-900 group-hover:text-secondary text-center">
                   {item.title}
                 </span>
               </a>

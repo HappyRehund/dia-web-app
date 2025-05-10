@@ -1,5 +1,5 @@
-"use client";
-import React, { useState } from "react";
+  "use client";
+import React, { useState, useEffect } from "react";
 import Container from "../Container";
 import Image from "next/image";
 import { History, MessageCircleMore } from "lucide-react";
@@ -31,10 +31,23 @@ const ITEMS = [
 
 function Hero() {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [displayName, setDisplayName] = useState("Miaw")
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch("/api/user");
+      const user = await res.json()
+      if (user) {
+        setDisplayName(String(user.displayName));
+      }
+    };  
+    
+    fetchUser();
+  }, []);
 
   return (
     <Container>
-      <Heading className="font-semibold">Hi there, Miaw</Heading>
+      <Heading className="font-semibold">Hi there, {displayName}</Heading>
       <div className="md:flex md:gap-6">
         {/* Left column: Health Summary + DiabetAI */}
 

@@ -69,7 +69,7 @@ export default function ChatbotModal({ open, onOpenChange }: ChatbotModalProps) 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-[800px] h-[80vh] flex flex-col p-0">
-        <DialogHeader className="px-4 py-2 border-b">
+        <DialogHeader className="px-4 py-4 border-b">
           <DialogTitle>DiabetAI Chat</DialogTitle>
         </DialogHeader>
         

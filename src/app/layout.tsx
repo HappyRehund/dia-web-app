@@ -4,6 +4,7 @@ import { stackServerApp } from "../stack";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,10 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-t from-amber-50 via-amber-50 to-amber-200 min-h-screen`}
       ><StackProvider app={stackServerApp}><StackTheme>
         <Navbar />
         {children}
+        <Toaster />
       </StackTheme></StackProvider></body>
     </html>
   );

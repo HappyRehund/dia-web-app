@@ -12,7 +12,7 @@ function Upload() {
         const formData = new FormData;
         event.files.forEach(file => formData.append("file", file as Blob, file.name));
 
-        const res = await axios.post("http://localhost:5000/rcsv", formData, {
+        const res = await axios.post("https://api-ulc.onrender.com/rcsv", formData, {
             headers: { "Content-Type": "multipart/form-data" }
         });
         setPredResult((res.data["Prediction"]));

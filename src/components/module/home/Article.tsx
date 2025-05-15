@@ -1,4 +1,4 @@
-import CarouselArticle from '@/components/CarouselArticle'
+import CarouselArticle from '@/components/module/home/CarouselArticle'
 import Container from '@/components/Container'
 import Heading from '@/components/Heading'
 import { ARTICLE } from '@/lib/helpers/article'

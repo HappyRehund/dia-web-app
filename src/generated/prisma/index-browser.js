@@ -136,6 +136,40 @@ exports.Prisma.UserProfileScalarFieldEnum = {
   weight: 'weight'
 };
 
+exports.Prisma.DietTrackingScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  totalCalories: 'totalCalories',
+  totalCarbs: 'totalCarbs',
+  totalProtein: 'totalProtein',
+  totalFat: 'totalFat'
+};
+
+exports.Prisma.MealScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  dietTrackingId: 'dietTrackingId',
+  name: 'name',
+  category: 'category',
+  calories: 'calories',
+  carbs: 'carbs',
+  protein: 'protein',
+  fat: 'fat',
+  date: 'date'
+};
+
+exports.Prisma.FoodItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  calories: 'calories',
+  carbs: 'carbs',
+  protein: 'protein',
+  fat: 'fat',
+  recipe: 'recipe'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -146,10 +180,23 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.MealCategory = exports.$Enums.MealCategory = {
+  BREAKFAST: 'BREAKFAST',
+  LUNCH: 'LUNCH',
+  DINNER: 'DINNER',
+  SNACK: 'SNACK'
+};
 
 exports.Prisma.ModelName = {
   DailyMonitoring: 'DailyMonitoring',
-  UserProfile: 'UserProfile'
+  UserProfile: 'UserProfile',
+  DietTracking: 'DietTracking',
+  Meal: 'Meal',
+  FoodItem: 'FoodItem'
 };
 
 /**

@@ -1,11 +1,17 @@
-import Article from "@/components/module/Article";
+import CarouselDoctor from "@/components/CarouselDoctor";
+import Doctors from "@/components/module/Doctors";
+import Features from "@/components/module/Features";
 import Hero from "@/components/module/Hero";
 
-export default async function Home() {
+
+export default async function LandingPage() {
   return (
     <>
+      {/* <Hero />
+      <Article /> */}
       <Hero />
-      <Article />
+      <Features />
+      <Doctors  />
     </>
   );
 }

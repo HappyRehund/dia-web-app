@@ -1,3 +1,4 @@
+// src/app/health-monitor/_actions/health.ts
 "use server";
 
 import { prisma } from "@/lib/prisma";
@@ -59,47 +60,5 @@ export async function createDailyMonitoring(data: CreateDailyMonitoringData) {
   } catch (error) {
     console.error("Error creating daily monitoring:", error);
     throw new Error("Failed to save health monitoring data");
-  }
-}
-
-export async function getMonitoringHistory(limit = 7) {
-  const user = await stackServerApp.getUser();
-
-  if (!user) redirect("/handler/sign-in");
-
-  try {
-    const history = await prisma.dailyMonitoring.findMany({
-      where: {
-        userId: user.id,
-      },
-      orderBy: {
-        date: "desc",
-      },
-      take: limit,
-    });
-
-    return history;
-  } catch (error) {
-    console.error("Error fetching monitoring history:", error);
-    throw new Error("Failed to fetch monitoring history");
-  }
-}
-
-export async function getUserProfile() {
-  const user = await stackServerApp.getUser();
-
-  if (!user) redirect("/handler/sign-in");
-
-  try {
-    const userProfile = await prisma.userProfile.findUnique({
-      where: {
-        userId: user.id,
-      },
-    });
-
-    return userProfile;
-  } catch (error) {
-    console.error("Error fetching user profile:", error);
-    throw new Error("Failed to fetch user profile");
   }
 }

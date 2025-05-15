@@ -23,15 +23,65 @@ model DailyMonitoring {
   cholesterol   Float
   uricAcid      Float
 
-  user          UserProfile @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  user UserProfile @relation(fields: [userId], references: [userId], onDelete: Cascade)
 
   @@unique([userId, date]) // optional: hanya 1 input per hari per user
 }
-
 model UserProfile {
   userId String @id // didapat dari Stack Auth (misal dari getUserDetails)
   height Float
   weight Float
 
-  monitorings DailyMonitoring[]
+  meals        Meal[]
+  dietTracking DietTracking[]
+  monitorings  DailyMonitoring[]
+}
+model DietTracking {
+  id            String      @id @default(cuid())
+  userId        String
+  date          DateTime
+  totalCalories Float       @default(0)
+  totalCarbs    Float       @default(0)
+  totalProtein  Float       @default(0)
+  totalFat      Float       @default(0)
+  meals         Meal[] // Relation to meals eaten on this day
+  user          UserProfile @relation(fields: [userId], references: [userId])
+
+  // Compound unique constraint to ensure one tracking per user per day
+  @@unique([userId, date])
+}
+
+model Meal {
+  id             String       @id @default(cuid())
+  userId         String
+  dietTrackingId String? // Optional because a meal can be created independently
+  name           String
+  category       MealCategory // Breakfast, Lunch, Dinner, Snack
+  calories       Float
+  carbs          Float // in grams
+  protein        Float // in grams
+  fat            Float // in grams
+  date           DateTime // Date when this meal was added/eaten
+
+  // Relations
+  dietTracking DietTracking? @relation(fields: [dietTrackingId], references: [id])
+  user         UserProfile   @relation(fields: [userId], references: [userId])
+}
+
+model FoodItem {
+  id       String  @id @default(cuid())
+  name     String
+  category String?
+  calories Float
+  carbs    Float // in grams
+  protein  Float // in grams
+  fat      Float // in grams
+  recipe   String? // How to prepare/cook this food item
+}
+
+enum MealCategory {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
 }

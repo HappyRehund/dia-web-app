@@ -17,7 +17,7 @@ import { UserButton } from "@stackframe/stack";
 const NAVBAR_ITEMS = [
   {
     name: "Home",
-    href: "/",
+    href: "/home",
   },
   {
     name: "Ulcus Detect",
@@ -45,7 +45,7 @@ async function Navbar() {
   if (!isSignedIn) return null;
   return (
     <>
-      <main className=" fixed inset-x-0 top-0 z-50 bg-transparent backdrop-blur-md">
+      <main className=" fixed inset-x-0 top-0 z-50 bg-[#F3E28D] shadow-lg backdrop-blur-md">
         <div className="h-20 flex items-center justify-between gap-8 max-w-7xl mx-auto px-4">
           <Link
             href="/"

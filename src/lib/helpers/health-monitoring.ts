@@ -1,25 +1,3 @@
-export function DateToUTCDate(date: Date) {
-  return new Date(
-    Date.UTC(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate(),
-      date.getHours(),
-      date.getMinutes(),
-      date.getSeconds(),
-      date.getMilliseconds()
-    )
-  );
-}
-
-// Helper function to format dates
-export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(date);
-}
 
 // Helper functions to determine health status based on values
 export function getGlucoseStatus(value: number): {status: string, color: string} {

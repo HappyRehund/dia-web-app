@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import {
   Dialog,
@@ -11,8 +10,6 @@ import {
 } from "../ui/dialog";
 import { toast } from "sonner";
 import { createDailyMonitoring } from "@/app/health-monitor/_actions/health";
-import { DateToUTCDate } from "@/lib/helpers/health-monitoring";
-import { useRouter } from "next/navigation";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
@@ -20,6 +17,8 @@ import { format } from "date-fns";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { Input } from "../ui/input";
+import { DateToUTCDate } from "@/lib/helpers/date2utc";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CreateDailyMonitoringFormData {
   date: Date;
@@ -34,9 +33,10 @@ interface Props {
 }
 
 export default function CreateDailyMonitoringDialog({ trigger }: Props) {
-  const router = useRouter();
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const [datePopoverOpen, setDatePopoverOpen] = useState(false);
   const [formData, setFormData] = useState<CreateDailyMonitoringFormData>({
     date: new Date(),
     glucoseLevel: 0,
@@ -59,6 +59,7 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
         ...prevFormData,
         date,
       }));
+      setDatePopoverOpen(false);
     }
   };
 
@@ -89,7 +90,8 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
       });
 
       setOpen(false);
-      router.refresh();
+
+      queryClient.invalidateQueries({ queryKey: ["monitoringHistory"] });
     } catch (error) {
       console.error(error);
       toast.error("Failed to save health data", {
@@ -110,7 +112,7 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="space-y-2">
             <div className="text-sm font-medium">Date</div>
-            <Popover>
+            <Popover open={datePopoverOpen} onOpenChange={setDatePopoverOpen}>
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
@@ -132,7 +134,6 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
                   mode="single"
                   selected={formData.date}
                   onSelect={handleDataChange}
-                  initialFocus
                 />
               </PopoverContent>
             </Popover>
@@ -140,7 +141,6 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
               Select monitoring date
             </p>
           </div>
-
           <div className="space-y-2">
             <div className="text-sm font-medium">Glucose Level (mg/dL)</div>
             <Input
@@ -154,7 +154,6 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
               Enter your blood glucose level
             </p>
           </div>
-
           <div className="space-y-2">
             <div className="text-sm font-medium">Blood Pressure (mmHg)</div>
             <Input
@@ -168,7 +167,6 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
               Enter your blood pressure
             </p>
           </div>
-
           <div className="space-y-2">
             <div className="text-sm font-medium">Cholesterol (mg/dL)</div>
             <Input
@@ -182,7 +180,6 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
               Enter your cholesterol level
             </p>
           </div>
-
           <div className="space-y-2">
             <div className="text-sm font-medium">Uric Acid (mg/dL)</div>
             <Input
@@ -196,7 +193,6 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
               Enter your uric acid level
             </p>
           </div>
-
           <DialogFooter>
             <DialogClose asChild>
               <Button type="button" variant="secondary">

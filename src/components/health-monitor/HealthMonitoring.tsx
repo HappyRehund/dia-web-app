@@ -1,11 +1,12 @@
-import { formatDate, getGlucoseStatus, getBloodPressureStatus, getCholesterolStatus, getUricAcidStatus } from "@/lib/helpers/health-monitoring";
+import { getGlucoseStatus, getBloodPressureStatus, getCholesterolStatus, getUricAcidStatus } from "@/lib/helpers/health-monitoring";
 import { Button } from "@/components/ui/button";
 import CreateDailyMonitoringDialog from "./CreateDailyMonitoringDialog";
-import { PlusCircle } from "lucide-react";
+import { Calendar1, PlusCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Droplet, Heart, TrendingUp, ActivityIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DailyMonitoring } from "@/generated/prisma";
+import { formatDate } from "@/lib/helpers/date2utc";
 
 interface HealthMonitoringProps {
   monitoringData: DailyMonitoring[];
@@ -30,8 +31,9 @@ export default function HealthMonitoring({ monitoringData }: HealthMonitoringPro
       {latestMonitoring ? (
         <>
           <div>
-            <h3 className="text-lg font-medium mb-4">
-              Latest Monitoring: {formatDate(latestMonitoring.date)}
+            <h3 className="text-lg font-semibold mb-4 flex items-center gap-1">
+              {formatDate(latestMonitoring.date)}
+              <span><Calendar1 /></span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

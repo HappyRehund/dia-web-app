@@ -12,7 +12,6 @@ interface HealthMonitoringProps {
   monitoringData: DailyMonitoring[];
 }
 
-export const runtime = 'edge'
 export default function HealthMonitoring({ monitoringData }: HealthMonitoringProps) {
   const latestMonitoring = monitoringData.length > 0 ? monitoringData[0] : null;
 

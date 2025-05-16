@@ -3,7 +3,6 @@ import Tracker from '@/components/module/track/Tracker';
 import { DietContext } from '@/hooks/useDietContext';
 import React, { useState } from 'react'
 
-export const runtime = 'edge'
 function TrackPage() {
     const [isDiet, setIsDiet] = useState(true)
 

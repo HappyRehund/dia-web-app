@@ -1,9 +1,10 @@
-import { useDietContext } from '@/app/track/page'
+
 import Container from '@/components/Container';
 import Heading from '@/components/Heading';
 import ActivityContent from '@/components/track/ActivityContent';
 import DietContent from '@/components/track/DietContent';
 import { Button } from '@/components/ui/button';
+import { useDietContext } from '@/hooks/useDietContext';
 import React from 'react'
 
 function Tracker() {

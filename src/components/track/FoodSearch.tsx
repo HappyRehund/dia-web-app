@@ -39,11 +39,13 @@ export default function FoodSearch() {
       </div>
       
       <Tabs defaultValue="all" value={selectedCategory} onValueChange={setSelectedCategory}>
-        <TabsList className="grid grid-cols-4 w-full">
+        <TabsList className="grid grid-cols-6 w-full">
           <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="breakfast">Breakfast</TabsTrigger>
-          <TabsTrigger value="lunch">Lunch</TabsTrigger>
-          <TabsTrigger value="dinner">Dinner</TabsTrigger>
+          <TabsTrigger value="vegetables">Vegetables</TabsTrigger>
+          <TabsTrigger value="cereals">Cereals</TabsTrigger>
+          <TabsTrigger value="protein">Protein</TabsTrigger>
+          <TabsTrigger value="oilsandfats">Oils and fats</TabsTrigger>
+          <TabsTrigger value="beverages">Beverages</TabsTrigger>
         </TabsList>
       </Tabs>
       

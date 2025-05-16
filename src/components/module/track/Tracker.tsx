@@ -38,7 +38,7 @@ function Tracker() {
         </div>
         
         {/* Content */}
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-transparent p-6">
           {isDiet ? <DietContent /> : <ActivityContent />}
         </div>
     </Container>

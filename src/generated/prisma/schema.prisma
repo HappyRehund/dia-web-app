@@ -33,9 +33,10 @@ model UserProfile {
   height Float
   weight Float
 
-  meals        Meal[]
-  dietTracking DietTracking[]
-  monitorings  DailyMonitoring[]
+  meals          Meal[]
+  dietTracking   DietTracking[]
+  monitorings    DailyMonitoring[]
+  UlcerDetection UlcerDetection[]
 }
 
 model DietTracking {
@@ -86,4 +87,18 @@ enum MealCategory {
   LUNCH
   DINNER
   SNACK
+}
+
+model UlcerDetection {
+  id             String   @id @default(uuid())
+  userId         String
+  date           DateTime @default(now())
+  ulcerpotential Level
+
+  user UserProfile @relation(fields: [userId], references: [userId])
+}
+
+enum Level {
+  Low
+  High
 }

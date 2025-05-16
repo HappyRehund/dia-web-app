@@ -38,6 +38,11 @@ export type Meal = $Result.DefaultSelection<Prisma.$MealPayload>
  * 
  */
 export type FoodItem = $Result.DefaultSelection<Prisma.$FoodItemPayload>
+/**
+ * Model UlcerDetection
+ * 
+ */
+export type UlcerDetection = $Result.DefaultSelection<Prisma.$UlcerDetectionPayload>
 
 /**
  * Enums
@@ -52,11 +57,23 @@ export namespace $Enums {
 
 export type MealCategory = (typeof MealCategory)[keyof typeof MealCategory]
 
+
+export const Level: {
+  Low: 'Low',
+  High: 'High'
+};
+
+export type Level = (typeof Level)[keyof typeof Level]
+
 }
 
 export type MealCategory = $Enums.MealCategory
 
 export const MealCategory: typeof $Enums.MealCategory
+
+export type Level = $Enums.Level
+
+export const Level: typeof $Enums.Level
 
 /**
  * ##  Prisma Client ʲˢ
@@ -232,6 +249,16 @@ export class PrismaClient<
     * ```
     */
   get foodItem(): Prisma.FoodItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ulcerDetection`: Exposes CRUD operations for the **UlcerDetection** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UlcerDetections
+    * const ulcerDetections = await prisma.ulcerDetection.findMany()
+    * ```
+    */
+  get ulcerDetection(): Prisma.UlcerDetectionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -676,7 +703,8 @@ export namespace Prisma {
     UserProfile: 'UserProfile',
     DietTracking: 'DietTracking',
     Meal: 'Meal',
-    FoodItem: 'FoodItem'
+    FoodItem: 'FoodItem',
+    UlcerDetection: 'UlcerDetection'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -695,7 +723,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "dailyMonitoring" | "userProfile" | "dietTracking" | "meal" | "foodItem"
+      modelProps: "dailyMonitoring" | "userProfile" | "dietTracking" | "meal" | "foodItem" | "ulcerDetection"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1069,6 +1097,80 @@ export namespace Prisma {
           }
         }
       }
+      UlcerDetection: {
+        payload: Prisma.$UlcerDetectionPayload<ExtArgs>
+        fields: Prisma.UlcerDetectionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UlcerDetectionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UlcerDetectionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>
+          }
+          findFirst: {
+            args: Prisma.UlcerDetectionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UlcerDetectionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>
+          }
+          findMany: {
+            args: Prisma.UlcerDetectionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>[]
+          }
+          create: {
+            args: Prisma.UlcerDetectionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>
+          }
+          createMany: {
+            args: Prisma.UlcerDetectionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UlcerDetectionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>[]
+          }
+          delete: {
+            args: Prisma.UlcerDetectionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>
+          }
+          update: {
+            args: Prisma.UlcerDetectionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>
+          }
+          deleteMany: {
+            args: Prisma.UlcerDetectionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UlcerDetectionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UlcerDetectionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>[]
+          }
+          upsert: {
+            args: Prisma.UlcerDetectionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UlcerDetectionPayload>
+          }
+          aggregate: {
+            args: Prisma.UlcerDetectionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUlcerDetection>
+          }
+          groupBy: {
+            args: Prisma.UlcerDetectionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UlcerDetectionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UlcerDetectionCountArgs<ExtArgs>
+            result: $Utils.Optional<UlcerDetectionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1158,6 +1260,7 @@ export namespace Prisma {
     dietTracking?: DietTrackingOmit
     meal?: MealOmit
     foodItem?: FoodItemOmit
+    ulcerDetection?: UlcerDetectionOmit
   }
 
   /* Types for Logging */
@@ -1255,12 +1358,14 @@ export namespace Prisma {
     meals: number
     dietTracking: number
     monitorings: number
+    UlcerDetection: number
   }
 
   export type UserProfileCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meals?: boolean | UserProfileCountOutputTypeCountMealsArgs
     dietTracking?: boolean | UserProfileCountOutputTypeCountDietTrackingArgs
     monitorings?: boolean | UserProfileCountOutputTypeCountMonitoringsArgs
+    UlcerDetection?: boolean | UserProfileCountOutputTypeCountUlcerDetectionArgs
   }
 
   // Custom InputTypes
@@ -1293,6 +1398,13 @@ export namespace Prisma {
    */
   export type UserProfileCountOutputTypeCountMonitoringsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DailyMonitoringWhereInput
+  }
+
+  /**
+   * UserProfileCountOutputType without action
+   */
+  export type UserProfileCountOutputTypeCountUlcerDetectionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UlcerDetectionWhereInput
   }
 
 
@@ -2650,6 +2762,7 @@ export namespace Prisma {
     meals?: boolean | UserProfile$mealsArgs<ExtArgs>
     dietTracking?: boolean | UserProfile$dietTrackingArgs<ExtArgs>
     monitorings?: boolean | UserProfile$monitoringsArgs<ExtArgs>
+    UlcerDetection?: boolean | UserProfile$UlcerDetectionArgs<ExtArgs>
     _count?: boolean | UserProfileCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userProfile"]>
 
@@ -2676,6 +2789,7 @@ export namespace Prisma {
     meals?: boolean | UserProfile$mealsArgs<ExtArgs>
     dietTracking?: boolean | UserProfile$dietTrackingArgs<ExtArgs>
     monitorings?: boolean | UserProfile$monitoringsArgs<ExtArgs>
+    UlcerDetection?: boolean | UserProfile$UlcerDetectionArgs<ExtArgs>
     _count?: boolean | UserProfileCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2687,6 +2801,7 @@ export namespace Prisma {
       meals: Prisma.$MealPayload<ExtArgs>[]
       dietTracking: Prisma.$DietTrackingPayload<ExtArgs>[]
       monitorings: Prisma.$DailyMonitoringPayload<ExtArgs>[]
+      UlcerDetection: Prisma.$UlcerDetectionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: string
@@ -3089,6 +3204,7 @@ export namespace Prisma {
     meals<T extends UserProfile$mealsArgs<ExtArgs> = {}>(args?: Subset<T, UserProfile$mealsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     dietTracking<T extends UserProfile$dietTrackingArgs<ExtArgs> = {}>(args?: Subset<T, UserProfile$dietTrackingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DietTrackingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     monitorings<T extends UserProfile$monitoringsArgs<ExtArgs> = {}>(args?: Subset<T, UserProfile$monitoringsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DailyMonitoringPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    UlcerDetection<T extends UserProfile$UlcerDetectionArgs<ExtArgs> = {}>(args?: Subset<T, UserProfile$UlcerDetectionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3578,6 +3694,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DailyMonitoringScalarFieldEnum | DailyMonitoringScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfile.UlcerDetection
+   */
+  export type UserProfile$UlcerDetectionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    where?: UlcerDetectionWhereInput
+    orderBy?: UlcerDetectionOrderByWithRelationInput | UlcerDetectionOrderByWithRelationInput[]
+    cursor?: UlcerDetectionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UlcerDetectionScalarFieldEnum | UlcerDetectionScalarFieldEnum[]
   }
 
   /**
@@ -7036,6 +7176,1051 @@ export namespace Prisma {
 
 
   /**
+   * Model UlcerDetection
+   */
+
+  export type AggregateUlcerDetection = {
+    _count: UlcerDetectionCountAggregateOutputType | null
+    _min: UlcerDetectionMinAggregateOutputType | null
+    _max: UlcerDetectionMaxAggregateOutputType | null
+  }
+
+  export type UlcerDetectionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    date: Date | null
+    ulcerpotential: $Enums.Level | null
+  }
+
+  export type UlcerDetectionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    date: Date | null
+    ulcerpotential: $Enums.Level | null
+  }
+
+  export type UlcerDetectionCountAggregateOutputType = {
+    id: number
+    userId: number
+    date: number
+    ulcerpotential: number
+    _all: number
+  }
+
+
+  export type UlcerDetectionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    ulcerpotential?: true
+  }
+
+  export type UlcerDetectionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    ulcerpotential?: true
+  }
+
+  export type UlcerDetectionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    ulcerpotential?: true
+    _all?: true
+  }
+
+  export type UlcerDetectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UlcerDetection to aggregate.
+     */
+    where?: UlcerDetectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UlcerDetections to fetch.
+     */
+    orderBy?: UlcerDetectionOrderByWithRelationInput | UlcerDetectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UlcerDetectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UlcerDetections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UlcerDetections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UlcerDetections
+    **/
+    _count?: true | UlcerDetectionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UlcerDetectionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UlcerDetectionMaxAggregateInputType
+  }
+
+  export type GetUlcerDetectionAggregateType<T extends UlcerDetectionAggregateArgs> = {
+        [P in keyof T & keyof AggregateUlcerDetection]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUlcerDetection[P]>
+      : GetScalarType<T[P], AggregateUlcerDetection[P]>
+  }
+
+
+
+
+  export type UlcerDetectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UlcerDetectionWhereInput
+    orderBy?: UlcerDetectionOrderByWithAggregationInput | UlcerDetectionOrderByWithAggregationInput[]
+    by: UlcerDetectionScalarFieldEnum[] | UlcerDetectionScalarFieldEnum
+    having?: UlcerDetectionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UlcerDetectionCountAggregateInputType | true
+    _min?: UlcerDetectionMinAggregateInputType
+    _max?: UlcerDetectionMaxAggregateInputType
+  }
+
+  export type UlcerDetectionGroupByOutputType = {
+    id: string
+    userId: string
+    date: Date
+    ulcerpotential: $Enums.Level
+    _count: UlcerDetectionCountAggregateOutputType | null
+    _min: UlcerDetectionMinAggregateOutputType | null
+    _max: UlcerDetectionMaxAggregateOutputType | null
+  }
+
+  type GetUlcerDetectionGroupByPayload<T extends UlcerDetectionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UlcerDetectionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UlcerDetectionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UlcerDetectionGroupByOutputType[P]>
+            : GetScalarType<T[P], UlcerDetectionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UlcerDetectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    ulcerpotential?: boolean
+    user?: boolean | UserProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ulcerDetection"]>
+
+  export type UlcerDetectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    ulcerpotential?: boolean
+    user?: boolean | UserProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ulcerDetection"]>
+
+  export type UlcerDetectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    ulcerpotential?: boolean
+    user?: boolean | UserProfileDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ulcerDetection"]>
+
+  export type UlcerDetectionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    ulcerpotential?: boolean
+  }
+
+  export type UlcerDetectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "date" | "ulcerpotential", ExtArgs["result"]["ulcerDetection"]>
+  export type UlcerDetectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserProfileDefaultArgs<ExtArgs>
+  }
+  export type UlcerDetectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserProfileDefaultArgs<ExtArgs>
+  }
+  export type UlcerDetectionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserProfileDefaultArgs<ExtArgs>
+  }
+
+  export type $UlcerDetectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UlcerDetection"
+    objects: {
+      user: Prisma.$UserProfilePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      date: Date
+      ulcerpotential: $Enums.Level
+    }, ExtArgs["result"]["ulcerDetection"]>
+    composites: {}
+  }
+
+  type UlcerDetectionGetPayload<S extends boolean | null | undefined | UlcerDetectionDefaultArgs> = $Result.GetResult<Prisma.$UlcerDetectionPayload, S>
+
+  type UlcerDetectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UlcerDetectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UlcerDetectionCountAggregateInputType | true
+    }
+
+  export interface UlcerDetectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UlcerDetection'], meta: { name: 'UlcerDetection' } }
+    /**
+     * Find zero or one UlcerDetection that matches the filter.
+     * @param {UlcerDetectionFindUniqueArgs} args - Arguments to find a UlcerDetection
+     * @example
+     * // Get one UlcerDetection
+     * const ulcerDetection = await prisma.ulcerDetection.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UlcerDetectionFindUniqueArgs>(args: SelectSubset<T, UlcerDetectionFindUniqueArgs<ExtArgs>>): Prisma__UlcerDetectionClient<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UlcerDetection that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UlcerDetectionFindUniqueOrThrowArgs} args - Arguments to find a UlcerDetection
+     * @example
+     * // Get one UlcerDetection
+     * const ulcerDetection = await prisma.ulcerDetection.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UlcerDetectionFindUniqueOrThrowArgs>(args: SelectSubset<T, UlcerDetectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UlcerDetectionClient<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UlcerDetection that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UlcerDetectionFindFirstArgs} args - Arguments to find a UlcerDetection
+     * @example
+     * // Get one UlcerDetection
+     * const ulcerDetection = await prisma.ulcerDetection.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UlcerDetectionFindFirstArgs>(args?: SelectSubset<T, UlcerDetectionFindFirstArgs<ExtArgs>>): Prisma__UlcerDetectionClient<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UlcerDetection that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UlcerDetectionFindFirstOrThrowArgs} args - Arguments to find a UlcerDetection
+     * @example
+     * // Get one UlcerDetection
+     * const ulcerDetection = await prisma.ulcerDetection.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UlcerDetectionFindFirstOrThrowArgs>(args?: SelectSubset<T, UlcerDetectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__UlcerDetectionClient<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UlcerDetections that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UlcerDetectionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UlcerDetections
+     * const ulcerDetections = await prisma.ulcerDetection.findMany()
+     * 
+     * // Get first 10 UlcerDetections
+     * const ulcerDetections = await prisma.ulcerDetection.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ulcerDetectionWithIdOnly = await prisma.ulcerDetection.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UlcerDetectionFindManyArgs>(args?: SelectSubset<T, UlcerDetectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UlcerDetection.
+     * @param {UlcerDetectionCreateArgs} args - Arguments to create a UlcerDetection.
+     * @example
+     * // Create one UlcerDetection
+     * const UlcerDetection = await prisma.ulcerDetection.create({
+     *   data: {
+     *     // ... data to create a UlcerDetection
+     *   }
+     * })
+     * 
+     */
+    create<T extends UlcerDetectionCreateArgs>(args: SelectSubset<T, UlcerDetectionCreateArgs<ExtArgs>>): Prisma__UlcerDetectionClient<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UlcerDetections.
+     * @param {UlcerDetectionCreateManyArgs} args - Arguments to create many UlcerDetections.
+     * @example
+     * // Create many UlcerDetections
+     * const ulcerDetection = await prisma.ulcerDetection.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UlcerDetectionCreateManyArgs>(args?: SelectSubset<T, UlcerDetectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UlcerDetections and returns the data saved in the database.
+     * @param {UlcerDetectionCreateManyAndReturnArgs} args - Arguments to create many UlcerDetections.
+     * @example
+     * // Create many UlcerDetections
+     * const ulcerDetection = await prisma.ulcerDetection.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UlcerDetections and only return the `id`
+     * const ulcerDetectionWithIdOnly = await prisma.ulcerDetection.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UlcerDetectionCreateManyAndReturnArgs>(args?: SelectSubset<T, UlcerDetectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UlcerDetection.
+     * @param {UlcerDetectionDeleteArgs} args - Arguments to delete one UlcerDetection.
+     * @example
+     * // Delete one UlcerDetection
+     * const UlcerDetection = await prisma.ulcerDetection.delete({
+     *   where: {
+     *     // ... filter to delete one UlcerDetection
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UlcerDetectionDeleteArgs>(args: SelectSubset<T, UlcerDetectionDeleteArgs<ExtArgs>>): Prisma__UlcerDetectionClient<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UlcerDetection.
+     * @param {UlcerDetectionUpdateArgs} args - Arguments to update one UlcerDetection.
+     * @example
+     * // Update one UlcerDetection
+     * const ulcerDetection = await prisma.ulcerDetection.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UlcerDetectionUpdateArgs>(args: SelectSubset<T, UlcerDetectionUpdateArgs<ExtArgs>>): Prisma__UlcerDetectionClient<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UlcerDetections.
+     * @param {UlcerDetectionDeleteManyArgs} args - Arguments to filter UlcerDetections to delete.
+     * @example
+     * // Delete a few UlcerDetections
+     * const { count } = await prisma.ulcerDetection.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UlcerDetectionDeleteManyArgs>(args?: SelectSubset<T, UlcerDetectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UlcerDetections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UlcerDetectionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UlcerDetections
+     * const ulcerDetection = await prisma.ulcerDetection.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UlcerDetectionUpdateManyArgs>(args: SelectSubset<T, UlcerDetectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UlcerDetections and returns the data updated in the database.
+     * @param {UlcerDetectionUpdateManyAndReturnArgs} args - Arguments to update many UlcerDetections.
+     * @example
+     * // Update many UlcerDetections
+     * const ulcerDetection = await prisma.ulcerDetection.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UlcerDetections and only return the `id`
+     * const ulcerDetectionWithIdOnly = await prisma.ulcerDetection.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UlcerDetectionUpdateManyAndReturnArgs>(args: SelectSubset<T, UlcerDetectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UlcerDetection.
+     * @param {UlcerDetectionUpsertArgs} args - Arguments to update or create a UlcerDetection.
+     * @example
+     * // Update or create a UlcerDetection
+     * const ulcerDetection = await prisma.ulcerDetection.upsert({
+     *   create: {
+     *     // ... data to create a UlcerDetection
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UlcerDetection we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UlcerDetectionUpsertArgs>(args: SelectSubset<T, UlcerDetectionUpsertArgs<ExtArgs>>): Prisma__UlcerDetectionClient<$Result.GetResult<Prisma.$UlcerDetectionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UlcerDetections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UlcerDetectionCountArgs} args - Arguments to filter UlcerDetections to count.
+     * @example
+     * // Count the number of UlcerDetections
+     * const count = await prisma.ulcerDetection.count({
+     *   where: {
+     *     // ... the filter for the UlcerDetections we want to count
+     *   }
+     * })
+    **/
+    count<T extends UlcerDetectionCountArgs>(
+      args?: Subset<T, UlcerDetectionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UlcerDetectionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UlcerDetection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UlcerDetectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UlcerDetectionAggregateArgs>(args: Subset<T, UlcerDetectionAggregateArgs>): Prisma.PrismaPromise<GetUlcerDetectionAggregateType<T>>
+
+    /**
+     * Group by UlcerDetection.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UlcerDetectionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UlcerDetectionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UlcerDetectionGroupByArgs['orderBy'] }
+        : { orderBy?: UlcerDetectionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UlcerDetectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUlcerDetectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UlcerDetection model
+   */
+  readonly fields: UlcerDetectionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UlcerDetection.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UlcerDetectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserProfileDefaultArgs<ExtArgs>>): Prisma__UserProfileClient<$Result.GetResult<Prisma.$UserProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UlcerDetection model
+   */
+  interface UlcerDetectionFieldRefs {
+    readonly id: FieldRef<"UlcerDetection", 'String'>
+    readonly userId: FieldRef<"UlcerDetection", 'String'>
+    readonly date: FieldRef<"UlcerDetection", 'DateTime'>
+    readonly ulcerpotential: FieldRef<"UlcerDetection", 'Level'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UlcerDetection findUnique
+   */
+  export type UlcerDetectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * Filter, which UlcerDetection to fetch.
+     */
+    where: UlcerDetectionWhereUniqueInput
+  }
+
+  /**
+   * UlcerDetection findUniqueOrThrow
+   */
+  export type UlcerDetectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * Filter, which UlcerDetection to fetch.
+     */
+    where: UlcerDetectionWhereUniqueInput
+  }
+
+  /**
+   * UlcerDetection findFirst
+   */
+  export type UlcerDetectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * Filter, which UlcerDetection to fetch.
+     */
+    where?: UlcerDetectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UlcerDetections to fetch.
+     */
+    orderBy?: UlcerDetectionOrderByWithRelationInput | UlcerDetectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UlcerDetections.
+     */
+    cursor?: UlcerDetectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UlcerDetections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UlcerDetections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UlcerDetections.
+     */
+    distinct?: UlcerDetectionScalarFieldEnum | UlcerDetectionScalarFieldEnum[]
+  }
+
+  /**
+   * UlcerDetection findFirstOrThrow
+   */
+  export type UlcerDetectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * Filter, which UlcerDetection to fetch.
+     */
+    where?: UlcerDetectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UlcerDetections to fetch.
+     */
+    orderBy?: UlcerDetectionOrderByWithRelationInput | UlcerDetectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UlcerDetections.
+     */
+    cursor?: UlcerDetectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UlcerDetections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UlcerDetections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UlcerDetections.
+     */
+    distinct?: UlcerDetectionScalarFieldEnum | UlcerDetectionScalarFieldEnum[]
+  }
+
+  /**
+   * UlcerDetection findMany
+   */
+  export type UlcerDetectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * Filter, which UlcerDetections to fetch.
+     */
+    where?: UlcerDetectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UlcerDetections to fetch.
+     */
+    orderBy?: UlcerDetectionOrderByWithRelationInput | UlcerDetectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UlcerDetections.
+     */
+    cursor?: UlcerDetectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UlcerDetections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UlcerDetections.
+     */
+    skip?: number
+    distinct?: UlcerDetectionScalarFieldEnum | UlcerDetectionScalarFieldEnum[]
+  }
+
+  /**
+   * UlcerDetection create
+   */
+  export type UlcerDetectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UlcerDetection.
+     */
+    data: XOR<UlcerDetectionCreateInput, UlcerDetectionUncheckedCreateInput>
+  }
+
+  /**
+   * UlcerDetection createMany
+   */
+  export type UlcerDetectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UlcerDetections.
+     */
+    data: UlcerDetectionCreateManyInput | UlcerDetectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UlcerDetection createManyAndReturn
+   */
+  export type UlcerDetectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * The data used to create many UlcerDetections.
+     */
+    data: UlcerDetectionCreateManyInput | UlcerDetectionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UlcerDetection update
+   */
+  export type UlcerDetectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UlcerDetection.
+     */
+    data: XOR<UlcerDetectionUpdateInput, UlcerDetectionUncheckedUpdateInput>
+    /**
+     * Choose, which UlcerDetection to update.
+     */
+    where: UlcerDetectionWhereUniqueInput
+  }
+
+  /**
+   * UlcerDetection updateMany
+   */
+  export type UlcerDetectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UlcerDetections.
+     */
+    data: XOR<UlcerDetectionUpdateManyMutationInput, UlcerDetectionUncheckedUpdateManyInput>
+    /**
+     * Filter which UlcerDetections to update
+     */
+    where?: UlcerDetectionWhereInput
+    /**
+     * Limit how many UlcerDetections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UlcerDetection updateManyAndReturn
+   */
+  export type UlcerDetectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * The data used to update UlcerDetections.
+     */
+    data: XOR<UlcerDetectionUpdateManyMutationInput, UlcerDetectionUncheckedUpdateManyInput>
+    /**
+     * Filter which UlcerDetections to update
+     */
+    where?: UlcerDetectionWhereInput
+    /**
+     * Limit how many UlcerDetections to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UlcerDetection upsert
+   */
+  export type UlcerDetectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UlcerDetection to update in case it exists.
+     */
+    where: UlcerDetectionWhereUniqueInput
+    /**
+     * In case the UlcerDetection found by the `where` argument doesn't exist, create a new UlcerDetection with this data.
+     */
+    create: XOR<UlcerDetectionCreateInput, UlcerDetectionUncheckedCreateInput>
+    /**
+     * In case the UlcerDetection was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UlcerDetectionUpdateInput, UlcerDetectionUncheckedUpdateInput>
+  }
+
+  /**
+   * UlcerDetection delete
+   */
+  export type UlcerDetectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+    /**
+     * Filter which UlcerDetection to delete.
+     */
+    where: UlcerDetectionWhereUniqueInput
+  }
+
+  /**
+   * UlcerDetection deleteMany
+   */
+  export type UlcerDetectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UlcerDetections to delete
+     */
+    where?: UlcerDetectionWhereInput
+    /**
+     * Limit how many UlcerDetections to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UlcerDetection without action
+   */
+  export type UlcerDetectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UlcerDetection
+     */
+    select?: UlcerDetectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UlcerDetection
+     */
+    omit?: UlcerDetectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UlcerDetectionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7112,6 +8297,16 @@ export namespace Prisma {
   };
 
   export type FoodItemScalarFieldEnum = (typeof FoodItemScalarFieldEnum)[keyof typeof FoodItemScalarFieldEnum]
+
+
+  export const UlcerDetectionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    date: 'date',
+    ulcerpotential: 'ulcerpotential'
+  };
+
+  export type UlcerDetectionScalarFieldEnum = (typeof UlcerDetectionScalarFieldEnum)[keyof typeof UlcerDetectionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7196,6 +8391,20 @@ export namespace Prisma {
    * Reference to a field of type 'MealCategory[]'
    */
   export type ListEnumMealCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MealCategory[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Level'
+   */
+  export type EnumLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Level'>
+    
+
+
+  /**
+   * Reference to a field of type 'Level[]'
+   */
+  export type ListEnumLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Level[]'>
     
 
 
@@ -7294,6 +8503,7 @@ export namespace Prisma {
     meals?: MealListRelationFilter
     dietTracking?: DietTrackingListRelationFilter
     monitorings?: DailyMonitoringListRelationFilter
+    UlcerDetection?: UlcerDetectionListRelationFilter
   }
 
   export type UserProfileOrderByWithRelationInput = {
@@ -7303,6 +8513,7 @@ export namespace Prisma {
     meals?: MealOrderByRelationAggregateInput
     dietTracking?: DietTrackingOrderByRelationAggregateInput
     monitorings?: DailyMonitoringOrderByRelationAggregateInput
+    UlcerDetection?: UlcerDetectionOrderByRelationAggregateInput
   }
 
   export type UserProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -7315,6 +8526,7 @@ export namespace Prisma {
     meals?: MealListRelationFilter
     dietTracking?: DietTrackingListRelationFilter
     monitorings?: DailyMonitoringListRelationFilter
+    UlcerDetection?: UlcerDetectionListRelationFilter
   }, "userId">
 
   export type UserProfileOrderByWithAggregationInput = {
@@ -7562,6 +8774,56 @@ export namespace Prisma {
     recipe?: StringNullableWithAggregatesFilter<"FoodItem"> | string | null
   }
 
+  export type UlcerDetectionWhereInput = {
+    AND?: UlcerDetectionWhereInput | UlcerDetectionWhereInput[]
+    OR?: UlcerDetectionWhereInput[]
+    NOT?: UlcerDetectionWhereInput | UlcerDetectionWhereInput[]
+    id?: StringFilter<"UlcerDetection"> | string
+    userId?: StringFilter<"UlcerDetection"> | string
+    date?: DateTimeFilter<"UlcerDetection"> | Date | string
+    ulcerpotential?: EnumLevelFilter<"UlcerDetection"> | $Enums.Level
+    user?: XOR<UserProfileScalarRelationFilter, UserProfileWhereInput>
+  }
+
+  export type UlcerDetectionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    ulcerpotential?: SortOrder
+    user?: UserProfileOrderByWithRelationInput
+  }
+
+  export type UlcerDetectionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UlcerDetectionWhereInput | UlcerDetectionWhereInput[]
+    OR?: UlcerDetectionWhereInput[]
+    NOT?: UlcerDetectionWhereInput | UlcerDetectionWhereInput[]
+    userId?: StringFilter<"UlcerDetection"> | string
+    date?: DateTimeFilter<"UlcerDetection"> | Date | string
+    ulcerpotential?: EnumLevelFilter<"UlcerDetection"> | $Enums.Level
+    user?: XOR<UserProfileScalarRelationFilter, UserProfileWhereInput>
+  }, "id">
+
+  export type UlcerDetectionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    ulcerpotential?: SortOrder
+    _count?: UlcerDetectionCountOrderByAggregateInput
+    _max?: UlcerDetectionMaxOrderByAggregateInput
+    _min?: UlcerDetectionMinOrderByAggregateInput
+  }
+
+  export type UlcerDetectionScalarWhereWithAggregatesInput = {
+    AND?: UlcerDetectionScalarWhereWithAggregatesInput | UlcerDetectionScalarWhereWithAggregatesInput[]
+    OR?: UlcerDetectionScalarWhereWithAggregatesInput[]
+    NOT?: UlcerDetectionScalarWhereWithAggregatesInput | UlcerDetectionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UlcerDetection"> | string
+    userId?: StringWithAggregatesFilter<"UlcerDetection"> | string
+    date?: DateTimeWithAggregatesFilter<"UlcerDetection"> | Date | string
+    ulcerpotential?: EnumLevelWithAggregatesFilter<"UlcerDetection"> | $Enums.Level
+  }
+
   export type DailyMonitoringCreateInput = {
     id?: string
     date?: Date | string
@@ -7638,6 +8900,7 @@ export namespace Prisma {
     meals?: MealCreateNestedManyWithoutUserInput
     dietTracking?: DietTrackingCreateNestedManyWithoutUserInput
     monitorings?: DailyMonitoringCreateNestedManyWithoutUserInput
+    UlcerDetection?: UlcerDetectionCreateNestedManyWithoutUserInput
   }
 
   export type UserProfileUncheckedCreateInput = {
@@ -7647,6 +8910,7 @@ export namespace Prisma {
     meals?: MealUncheckedCreateNestedManyWithoutUserInput
     dietTracking?: DietTrackingUncheckedCreateNestedManyWithoutUserInput
     monitorings?: DailyMonitoringUncheckedCreateNestedManyWithoutUserInput
+    UlcerDetection?: UlcerDetectionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserProfileUpdateInput = {
@@ -7656,6 +8920,7 @@ export namespace Prisma {
     meals?: MealUpdateManyWithoutUserNestedInput
     dietTracking?: DietTrackingUpdateManyWithoutUserNestedInput
     monitorings?: DailyMonitoringUpdateManyWithoutUserNestedInput
+    UlcerDetection?: UlcerDetectionUpdateManyWithoutUserNestedInput
   }
 
   export type UserProfileUncheckedUpdateInput = {
@@ -7665,6 +8930,7 @@ export namespace Prisma {
     meals?: MealUncheckedUpdateManyWithoutUserNestedInput
     dietTracking?: DietTrackingUncheckedUpdateManyWithoutUserNestedInput
     monitorings?: DailyMonitoringUncheckedUpdateManyWithoutUserNestedInput
+    UlcerDetection?: UlcerDetectionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserProfileCreateManyInput = {
@@ -7924,6 +9190,54 @@ export namespace Prisma {
     recipe?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type UlcerDetectionCreateInput = {
+    id?: string
+    date?: Date | string
+    ulcerpotential: $Enums.Level
+    user: UserProfileCreateNestedOneWithoutUlcerDetectionInput
+  }
+
+  export type UlcerDetectionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    date?: Date | string
+    ulcerpotential: $Enums.Level
+  }
+
+  export type UlcerDetectionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ulcerpotential?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
+    user?: UserProfileUpdateOneRequiredWithoutUlcerDetectionNestedInput
+  }
+
+  export type UlcerDetectionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ulcerpotential?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  }
+
+  export type UlcerDetectionCreateManyInput = {
+    id?: string
+    userId: string
+    date?: Date | string
+    ulcerpotential: $Enums.Level
+  }
+
+  export type UlcerDetectionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ulcerpotential?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  }
+
+  export type UlcerDetectionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ulcerpotential?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8081,6 +9395,12 @@ export namespace Prisma {
     none?: DailyMonitoringWhereInput
   }
 
+  export type UlcerDetectionListRelationFilter = {
+    every?: UlcerDetectionWhereInput
+    some?: UlcerDetectionWhereInput
+    none?: UlcerDetectionWhereInput
+  }
+
   export type MealOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -8090,6 +9410,10 @@ export namespace Prisma {
   }
 
   export type DailyMonitoringOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UlcerDetectionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8330,6 +9654,44 @@ export namespace Prisma {
     fat?: SortOrder
   }
 
+  export type EnumLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.Level | EnumLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.Level[] | ListEnumLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Level[] | ListEnumLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumLevelFilter<$PrismaModel> | $Enums.Level
+  }
+
+  export type UlcerDetectionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    ulcerpotential?: SortOrder
+  }
+
+  export type UlcerDetectionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    ulcerpotential?: SortOrder
+  }
+
+  export type UlcerDetectionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    ulcerpotential?: SortOrder
+  }
+
+  export type EnumLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Level | EnumLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.Level[] | ListEnumLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Level[] | ListEnumLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumLevelWithAggregatesFilter<$PrismaModel> | $Enums.Level
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLevelFilter<$PrismaModel>
+    _max?: NestedEnumLevelFilter<$PrismaModel>
+  }
+
   export type UserProfileCreateNestedOneWithoutMonitoringsInput = {
     create?: XOR<UserProfileCreateWithoutMonitoringsInput, UserProfileUncheckedCreateWithoutMonitoringsInput>
     connectOrCreate?: UserProfileCreateOrConnectWithoutMonitoringsInput
@@ -8381,6 +9743,13 @@ export namespace Prisma {
     connect?: DailyMonitoringWhereUniqueInput | DailyMonitoringWhereUniqueInput[]
   }
 
+  export type UlcerDetectionCreateNestedManyWithoutUserInput = {
+    create?: XOR<UlcerDetectionCreateWithoutUserInput, UlcerDetectionUncheckedCreateWithoutUserInput> | UlcerDetectionCreateWithoutUserInput[] | UlcerDetectionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UlcerDetectionCreateOrConnectWithoutUserInput | UlcerDetectionCreateOrConnectWithoutUserInput[]
+    createMany?: UlcerDetectionCreateManyUserInputEnvelope
+    connect?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+  }
+
   export type MealUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<MealCreateWithoutUserInput, MealUncheckedCreateWithoutUserInput> | MealCreateWithoutUserInput[] | MealUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MealCreateOrConnectWithoutUserInput | MealCreateOrConnectWithoutUserInput[]
@@ -8400,6 +9769,13 @@ export namespace Prisma {
     connectOrCreate?: DailyMonitoringCreateOrConnectWithoutUserInput | DailyMonitoringCreateOrConnectWithoutUserInput[]
     createMany?: DailyMonitoringCreateManyUserInputEnvelope
     connect?: DailyMonitoringWhereUniqueInput | DailyMonitoringWhereUniqueInput[]
+  }
+
+  export type UlcerDetectionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UlcerDetectionCreateWithoutUserInput, UlcerDetectionUncheckedCreateWithoutUserInput> | UlcerDetectionCreateWithoutUserInput[] | UlcerDetectionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UlcerDetectionCreateOrConnectWithoutUserInput | UlcerDetectionCreateOrConnectWithoutUserInput[]
+    createMany?: UlcerDetectionCreateManyUserInputEnvelope
+    connect?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
   }
 
   export type MealUpdateManyWithoutUserNestedInput = {
@@ -8444,6 +9820,20 @@ export namespace Prisma {
     deleteMany?: DailyMonitoringScalarWhereInput | DailyMonitoringScalarWhereInput[]
   }
 
+  export type UlcerDetectionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UlcerDetectionCreateWithoutUserInput, UlcerDetectionUncheckedCreateWithoutUserInput> | UlcerDetectionCreateWithoutUserInput[] | UlcerDetectionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UlcerDetectionCreateOrConnectWithoutUserInput | UlcerDetectionCreateOrConnectWithoutUserInput[]
+    upsert?: UlcerDetectionUpsertWithWhereUniqueWithoutUserInput | UlcerDetectionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UlcerDetectionCreateManyUserInputEnvelope
+    set?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+    disconnect?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+    delete?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+    connect?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+    update?: UlcerDetectionUpdateWithWhereUniqueWithoutUserInput | UlcerDetectionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UlcerDetectionUpdateManyWithWhereWithoutUserInput | UlcerDetectionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UlcerDetectionScalarWhereInput | UlcerDetectionScalarWhereInput[]
+  }
+
   export type MealUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<MealCreateWithoutUserInput, MealUncheckedCreateWithoutUserInput> | MealCreateWithoutUserInput[] | MealUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MealCreateOrConnectWithoutUserInput | MealCreateOrConnectWithoutUserInput[]
@@ -8484,6 +9874,20 @@ export namespace Prisma {
     update?: DailyMonitoringUpdateWithWhereUniqueWithoutUserInput | DailyMonitoringUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: DailyMonitoringUpdateManyWithWhereWithoutUserInput | DailyMonitoringUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: DailyMonitoringScalarWhereInput | DailyMonitoringScalarWhereInput[]
+  }
+
+  export type UlcerDetectionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UlcerDetectionCreateWithoutUserInput, UlcerDetectionUncheckedCreateWithoutUserInput> | UlcerDetectionCreateWithoutUserInput[] | UlcerDetectionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UlcerDetectionCreateOrConnectWithoutUserInput | UlcerDetectionCreateOrConnectWithoutUserInput[]
+    upsert?: UlcerDetectionUpsertWithWhereUniqueWithoutUserInput | UlcerDetectionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UlcerDetectionCreateManyUserInputEnvelope
+    set?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+    disconnect?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+    delete?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+    connect?: UlcerDetectionWhereUniqueInput | UlcerDetectionWhereUniqueInput[]
+    update?: UlcerDetectionUpdateWithWhereUniqueWithoutUserInput | UlcerDetectionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UlcerDetectionUpdateManyWithWhereWithoutUserInput | UlcerDetectionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UlcerDetectionScalarWhereInput | UlcerDetectionScalarWhereInput[]
   }
 
   export type MealCreateNestedManyWithoutDietTrackingInput = {
@@ -8578,6 +9982,24 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type UserProfileCreateNestedOneWithoutUlcerDetectionInput = {
+    create?: XOR<UserProfileCreateWithoutUlcerDetectionInput, UserProfileUncheckedCreateWithoutUlcerDetectionInput>
+    connectOrCreate?: UserProfileCreateOrConnectWithoutUlcerDetectionInput
+    connect?: UserProfileWhereUniqueInput
+  }
+
+  export type EnumLevelFieldUpdateOperationsInput = {
+    set?: $Enums.Level
+  }
+
+  export type UserProfileUpdateOneRequiredWithoutUlcerDetectionNestedInput = {
+    create?: XOR<UserProfileCreateWithoutUlcerDetectionInput, UserProfileUncheckedCreateWithoutUlcerDetectionInput>
+    connectOrCreate?: UserProfileCreateOrConnectWithoutUlcerDetectionInput
+    upsert?: UserProfileUpsertWithoutUlcerDetectionInput
+    connect?: UserProfileWhereUniqueInput
+    update?: XOR<XOR<UserProfileUpdateToOneWithWhereWithoutUlcerDetectionInput, UserProfileUpdateWithoutUlcerDetectionInput>, UserProfileUncheckedUpdateWithoutUlcerDetectionInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8733,12 +10155,30 @@ export namespace Prisma {
     _max?: NestedEnumMealCategoryFilter<$PrismaModel>
   }
 
+  export type NestedEnumLevelFilter<$PrismaModel = never> = {
+    equals?: $Enums.Level | EnumLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.Level[] | ListEnumLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Level[] | ListEnumLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumLevelFilter<$PrismaModel> | $Enums.Level
+  }
+
+  export type NestedEnumLevelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Level | EnumLevelFieldRefInput<$PrismaModel>
+    in?: $Enums.Level[] | ListEnumLevelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Level[] | ListEnumLevelFieldRefInput<$PrismaModel>
+    not?: NestedEnumLevelWithAggregatesFilter<$PrismaModel> | $Enums.Level
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLevelFilter<$PrismaModel>
+    _max?: NestedEnumLevelFilter<$PrismaModel>
+  }
+
   export type UserProfileCreateWithoutMonitoringsInput = {
     userId: string
     height: number
     weight: number
     meals?: MealCreateNestedManyWithoutUserInput
     dietTracking?: DietTrackingCreateNestedManyWithoutUserInput
+    UlcerDetection?: UlcerDetectionCreateNestedManyWithoutUserInput
   }
 
   export type UserProfileUncheckedCreateWithoutMonitoringsInput = {
@@ -8747,6 +10187,7 @@ export namespace Prisma {
     weight: number
     meals?: MealUncheckedCreateNestedManyWithoutUserInput
     dietTracking?: DietTrackingUncheckedCreateNestedManyWithoutUserInput
+    UlcerDetection?: UlcerDetectionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserProfileCreateOrConnectWithoutMonitoringsInput = {
@@ -8771,6 +10212,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     meals?: MealUpdateManyWithoutUserNestedInput
     dietTracking?: DietTrackingUpdateManyWithoutUserNestedInput
+    UlcerDetection?: UlcerDetectionUpdateManyWithoutUserNestedInput
   }
 
   export type UserProfileUncheckedUpdateWithoutMonitoringsInput = {
@@ -8779,6 +10221,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     meals?: MealUncheckedUpdateManyWithoutUserNestedInput
     dietTracking?: DietTrackingUncheckedUpdateManyWithoutUserNestedInput
+    UlcerDetection?: UlcerDetectionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MealCreateWithoutUserInput = {
@@ -8873,6 +10316,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UlcerDetectionCreateWithoutUserInput = {
+    id?: string
+    date?: Date | string
+    ulcerpotential: $Enums.Level
+  }
+
+  export type UlcerDetectionUncheckedCreateWithoutUserInput = {
+    id?: string
+    date?: Date | string
+    ulcerpotential: $Enums.Level
+  }
+
+  export type UlcerDetectionCreateOrConnectWithoutUserInput = {
+    where: UlcerDetectionWhereUniqueInput
+    create: XOR<UlcerDetectionCreateWithoutUserInput, UlcerDetectionUncheckedCreateWithoutUserInput>
+  }
+
+  export type UlcerDetectionCreateManyUserInputEnvelope = {
+    data: UlcerDetectionCreateManyUserInput | UlcerDetectionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MealUpsertWithWhereUniqueWithoutUserInput = {
     where: MealWhereUniqueInput
     update: XOR<MealUpdateWithoutUserInput, MealUncheckedUpdateWithoutUserInput>
@@ -8963,6 +10428,32 @@ export namespace Prisma {
     uricAcid?: FloatFilter<"DailyMonitoring"> | number
   }
 
+  export type UlcerDetectionUpsertWithWhereUniqueWithoutUserInput = {
+    where: UlcerDetectionWhereUniqueInput
+    update: XOR<UlcerDetectionUpdateWithoutUserInput, UlcerDetectionUncheckedUpdateWithoutUserInput>
+    create: XOR<UlcerDetectionCreateWithoutUserInput, UlcerDetectionUncheckedCreateWithoutUserInput>
+  }
+
+  export type UlcerDetectionUpdateWithWhereUniqueWithoutUserInput = {
+    where: UlcerDetectionWhereUniqueInput
+    data: XOR<UlcerDetectionUpdateWithoutUserInput, UlcerDetectionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UlcerDetectionUpdateManyWithWhereWithoutUserInput = {
+    where: UlcerDetectionScalarWhereInput
+    data: XOR<UlcerDetectionUpdateManyMutationInput, UlcerDetectionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UlcerDetectionScalarWhereInput = {
+    AND?: UlcerDetectionScalarWhereInput | UlcerDetectionScalarWhereInput[]
+    OR?: UlcerDetectionScalarWhereInput[]
+    NOT?: UlcerDetectionScalarWhereInput | UlcerDetectionScalarWhereInput[]
+    id?: StringFilter<"UlcerDetection"> | string
+    userId?: StringFilter<"UlcerDetection"> | string
+    date?: DateTimeFilter<"UlcerDetection"> | Date | string
+    ulcerpotential?: EnumLevelFilter<"UlcerDetection"> | $Enums.Level
+  }
+
   export type MealCreateWithoutDietTrackingInput = {
     id?: string
     name: string
@@ -9003,6 +10494,7 @@ export namespace Prisma {
     weight: number
     meals?: MealCreateNestedManyWithoutUserInput
     monitorings?: DailyMonitoringCreateNestedManyWithoutUserInput
+    UlcerDetection?: UlcerDetectionCreateNestedManyWithoutUserInput
   }
 
   export type UserProfileUncheckedCreateWithoutDietTrackingInput = {
@@ -9011,6 +10503,7 @@ export namespace Prisma {
     weight: number
     meals?: MealUncheckedCreateNestedManyWithoutUserInput
     monitorings?: DailyMonitoringUncheckedCreateNestedManyWithoutUserInput
+    UlcerDetection?: UlcerDetectionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserProfileCreateOrConnectWithoutDietTrackingInput = {
@@ -9051,6 +10544,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     meals?: MealUpdateManyWithoutUserNestedInput
     monitorings?: DailyMonitoringUpdateManyWithoutUserNestedInput
+    UlcerDetection?: UlcerDetectionUpdateManyWithoutUserNestedInput
   }
 
   export type UserProfileUncheckedUpdateWithoutDietTrackingInput = {
@@ -9059,6 +10553,7 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     meals?: MealUncheckedUpdateManyWithoutUserNestedInput
     monitorings?: DailyMonitoringUncheckedUpdateManyWithoutUserNestedInput
+    UlcerDetection?: UlcerDetectionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DietTrackingCreateWithoutMealsInput = {
@@ -9092,6 +10587,7 @@ export namespace Prisma {
     weight: number
     dietTracking?: DietTrackingCreateNestedManyWithoutUserInput
     monitorings?: DailyMonitoringCreateNestedManyWithoutUserInput
+    UlcerDetection?: UlcerDetectionCreateNestedManyWithoutUserInput
   }
 
   export type UserProfileUncheckedCreateWithoutMealsInput = {
@@ -9100,6 +10596,7 @@ export namespace Prisma {
     weight: number
     dietTracking?: DietTrackingUncheckedCreateNestedManyWithoutUserInput
     monitorings?: DailyMonitoringUncheckedCreateNestedManyWithoutUserInput
+    UlcerDetection?: UlcerDetectionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserProfileCreateOrConnectWithoutMealsInput = {
@@ -9155,12 +10652,66 @@ export namespace Prisma {
     weight?: FloatFieldUpdateOperationsInput | number
     dietTracking?: DietTrackingUpdateManyWithoutUserNestedInput
     monitorings?: DailyMonitoringUpdateManyWithoutUserNestedInput
+    UlcerDetection?: UlcerDetectionUpdateManyWithoutUserNestedInput
   }
 
   export type UserProfileUncheckedUpdateWithoutMealsInput = {
     userId?: StringFieldUpdateOperationsInput | string
     height?: FloatFieldUpdateOperationsInput | number
     weight?: FloatFieldUpdateOperationsInput | number
+    dietTracking?: DietTrackingUncheckedUpdateManyWithoutUserNestedInput
+    monitorings?: DailyMonitoringUncheckedUpdateManyWithoutUserNestedInput
+    UlcerDetection?: UlcerDetectionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserProfileCreateWithoutUlcerDetectionInput = {
+    userId: string
+    height: number
+    weight: number
+    meals?: MealCreateNestedManyWithoutUserInput
+    dietTracking?: DietTrackingCreateNestedManyWithoutUserInput
+    monitorings?: DailyMonitoringCreateNestedManyWithoutUserInput
+  }
+
+  export type UserProfileUncheckedCreateWithoutUlcerDetectionInput = {
+    userId: string
+    height: number
+    weight: number
+    meals?: MealUncheckedCreateNestedManyWithoutUserInput
+    dietTracking?: DietTrackingUncheckedCreateNestedManyWithoutUserInput
+    monitorings?: DailyMonitoringUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserProfileCreateOrConnectWithoutUlcerDetectionInput = {
+    where: UserProfileWhereUniqueInput
+    create: XOR<UserProfileCreateWithoutUlcerDetectionInput, UserProfileUncheckedCreateWithoutUlcerDetectionInput>
+  }
+
+  export type UserProfileUpsertWithoutUlcerDetectionInput = {
+    update: XOR<UserProfileUpdateWithoutUlcerDetectionInput, UserProfileUncheckedUpdateWithoutUlcerDetectionInput>
+    create: XOR<UserProfileCreateWithoutUlcerDetectionInput, UserProfileUncheckedCreateWithoutUlcerDetectionInput>
+    where?: UserProfileWhereInput
+  }
+
+  export type UserProfileUpdateToOneWithWhereWithoutUlcerDetectionInput = {
+    where?: UserProfileWhereInput
+    data: XOR<UserProfileUpdateWithoutUlcerDetectionInput, UserProfileUncheckedUpdateWithoutUlcerDetectionInput>
+  }
+
+  export type UserProfileUpdateWithoutUlcerDetectionInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
+    meals?: MealUpdateManyWithoutUserNestedInput
+    dietTracking?: DietTrackingUpdateManyWithoutUserNestedInput
+    monitorings?: DailyMonitoringUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserProfileUncheckedUpdateWithoutUlcerDetectionInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    height?: FloatFieldUpdateOperationsInput | number
+    weight?: FloatFieldUpdateOperationsInput | number
+    meals?: MealUncheckedUpdateManyWithoutUserNestedInput
     dietTracking?: DietTrackingUncheckedUpdateManyWithoutUserNestedInput
     monitorings?: DailyMonitoringUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -9193,6 +10744,12 @@ export namespace Prisma {
     bloodPressure: number
     cholesterol: number
     uricAcid: number
+  }
+
+  export type UlcerDetectionCreateManyUserInput = {
+    id?: string
+    date?: Date | string
+    ulcerpotential: $Enums.Level
   }
 
   export type MealUpdateWithoutUserInput = {
@@ -9285,6 +10842,24 @@ export namespace Prisma {
     bloodPressure?: FloatFieldUpdateOperationsInput | number
     cholesterol?: FloatFieldUpdateOperationsInput | number
     uricAcid?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type UlcerDetectionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ulcerpotential?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  }
+
+  export type UlcerDetectionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ulcerpotential?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
+  }
+
+  export type UlcerDetectionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ulcerpotential?: EnumLevelFieldUpdateOperationsInput | $Enums.Level
   }
 
   export type MealCreateManyDietTrackingInput = {

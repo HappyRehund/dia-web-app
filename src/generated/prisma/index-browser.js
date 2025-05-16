@@ -170,6 +170,13 @@ exports.Prisma.FoodItemScalarFieldEnum = {
   recipe: 'recipe'
 };
 
+exports.Prisma.UlcerDetectionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
+  ulcerpotential: 'ulcerpotential'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -191,12 +198,18 @@ exports.MealCategory = exports.$Enums.MealCategory = {
   SNACK: 'SNACK'
 };
 
+exports.Level = exports.$Enums.Level = {
+  Low: 'Low',
+  High: 'High'
+};
+
 exports.Prisma.ModelName = {
   DailyMonitoring: 'DailyMonitoring',
   UserProfile: 'UserProfile',
   DietTracking: 'DietTracking',
   Meal: 'Meal',
-  FoodItem: 'FoodItem'
+  FoodItem: 'FoodItem',
+  UlcerDetection: 'UlcerDetection'
 };
 
 /**

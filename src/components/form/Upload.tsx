@@ -16,6 +16,20 @@ function Upload() {
             headers: { "Content-Type": "multipart/form-data" }
         });
         setPredResult((res.data["Prediction"]));
+
+        const storeres = await fetch('/api/detection', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(predResult),
+        });
+        if(!storeres.ok) {
+            console.error("Failed to store diagnosis")
+        } else {
+            console.log("Stored diagnosis successfully")
+        }
+
         fileUploadRef.current?.clear()
     }
 

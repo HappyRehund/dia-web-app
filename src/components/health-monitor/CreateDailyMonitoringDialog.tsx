@@ -20,6 +20,7 @@ import { Input } from "../ui/input";
 import { DateToUTCDate } from "@/lib/helpers/date2utc";
 import { useQueryClient } from "@tanstack/react-query";
 
+export const runtime = 'edge'
 interface CreateDailyMonitoringFormData {
   date: Date;
   glucoseLevel: number;

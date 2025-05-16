@@ -1,12 +1,10 @@
+// src/app/health-monitor/_actions/health.ts
 "use server";
 
 import { prisma } from "@/lib/prisma";
 import { stackServerApp } from "@/stack";
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
-import { revalidatePath } from "next/cache";
 
-// Define a type for the input data
 interface CreateDailyMonitoringData {
   date: Date;
   glucoseLevel: number;
@@ -15,12 +13,9 @@ interface CreateDailyMonitoringData {
   uricAcid: number;
 }
 
-/**
- * Server action to create or update daily health monitoring data
- */
 export async function createDailyMonitoring(data: CreateDailyMonitoringData) {
-  // Get the current user or redirect to sign-in
   const user = await stackServerApp.getUser();
+
   if (!user) redirect("/handler/sign-in");
 
   try {
@@ -61,12 +56,9 @@ export async function createDailyMonitoring(data: CreateDailyMonitoringData) {
       },
     });
 
-    // Revalidate the health-monitor path to refresh the UI
-    revalidatePath("/health-monitor");
-    
-    return { success: true, data: dailyMonitoring };
+    return dailyMonitoring;
   } catch (error) {
     console.error("Error creating daily monitoring:", error);
-    return { success: false, error: "Failed to save health monitoring data" };
+    throw new Error("Failed to save health monitoring data");
   }
 }

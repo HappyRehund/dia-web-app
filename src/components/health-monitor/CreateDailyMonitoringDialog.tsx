@@ -20,7 +20,6 @@ import { Input } from "../ui/input";
 import { DateToUTCDate } from "@/lib/helpers/date2utc";
 import { useQueryClient } from "@tanstack/react-query";
 
-export const runtime = 'edge'
 interface CreateDailyMonitoringFormData {
   date: Date;
   glucoseLevel: number;
@@ -73,24 +72,15 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
     });
 
     try {
-      // Use formdata with explicit type conversion for numbers
-      const result = await createDailyMonitoring({
+      await createDailyMonitoring({
+        ...formData,
         date: DateToUTCDate(formData.date),
-        glucoseLevel: Number(formData.glucoseLevel),
-        bloodPressure: Number(formData.bloodPressure),
-        cholesterol: Number(formData.cholesterol),
-        uricAcid: Number(formData.uricAcid),
       });
-
-      if (!result || !result.success) {
-        throw new Error(result?.error || "Failed to save health data");
-      }
 
       toast.success("Health data saved successfully", {
         id: "create-monitoring",
       });
 
-      // Reset form
       setFormData({
         date: new Date(),
         glucoseLevel: 0,
@@ -101,11 +91,10 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
 
       setOpen(false);
 
-      // Invalidate query to refresh data
       queryClient.invalidateQueries({ queryKey: ["monitoringHistory"] });
     } catch (error) {
-      console.error("Form submission error:", error);
-      toast.error(error instanceof Error ? error.message : "Failed to save health data", {
+      console.error(error);
+      toast.error("Failed to save health data", {
         id: "create-monitoring",
       });
     } finally {

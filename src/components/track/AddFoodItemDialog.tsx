@@ -103,10 +103,11 @@ export default function AddFoodItemDialog() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="BREAKFAST">Breakfast</SelectItem>
-                      <SelectItem value="LUNCH">Lunch</SelectItem>
-                      <SelectItem value="DINNER">Dinner</SelectItem>
-                      <SelectItem value="SNACK">Snack</SelectItem>
+                      <SelectItem value="vegetables">Vegetables</SelectItem>
+                      <SelectItem value="cereals">Cereals</SelectItem>
+                      <SelectItem value="protein">Protein</SelectItem>
+                      <SelectItem value="oilsandfats">Oils and Fats</SelectItem> 
+                      <SelectItem value="beverages">Beverages</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

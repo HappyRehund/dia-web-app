@@ -46,7 +46,7 @@ async function Navbar() {
   return (
     <>
       <main className=" fixed inset-x-0 top-0 z-50 bg-[#F3E28D] shadow-lg backdrop-blur-md">
-        <div className="h-20 flex items-center justify-between gap-8 max-w-full mx-auto px-36">
+        <div className="h-20 flex items-center justify-between gap-8 max-w-full mx-auto px-16 xl:px-36">
           <Link
             href="/"
             className="text-2xl font-bold font-mono tracking-wider items-center flex gap-2"

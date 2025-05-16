@@ -9,7 +9,6 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { toast } from "sonner";
-import { createDailyMonitoring } from "@/app/health-monitor/_actions/health";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
@@ -18,7 +17,7 @@ import { CalendarIcon, Loader2 } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { Input } from "../ui/input";
 import { DateToUTCDate } from "@/lib/helpers/date2utc";
-import { useQueryClient } from "@tanstack/react-query";
+import { useCreateDailyMonitoring } from "@/hooks/useHealthMonitoring";
 
 interface CreateDailyMonitoringFormData {
   date: Date;
@@ -33,9 +32,7 @@ interface Props {
 }
 
 export default function CreateDailyMonitoringDialog({ trigger }: Props) {
-  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [isPending, setIsPending] = useState(false);
   const [datePopoverOpen, setDatePopoverOpen] = useState(false);
   const [formData, setFormData] = useState<CreateDailyMonitoringFormData>({
     date: new Date(),
@@ -44,6 +41,8 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
     cholesterol: 0,
     uricAcid: 0,
   });
+
+  const { mutate: createMonitoring, isPending } = useCreateDailyMonitoring();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -65,40 +64,46 @@ export default function CreateDailyMonitoringDialog({ trigger }: Props) {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setIsPending(true);
 
     toast.loading("Saving health data...", {
       id: "create-monitoring",
     });
 
     try {
-      await createDailyMonitoring({
-        ...formData,
-        date: DateToUTCDate(formData.date),
-      });
+      createMonitoring(
+        {
+          ...formData,
+          date: DateToUTCDate(formData.date),
+        },
+        {
+          onSuccess: () => {
+            toast.success("Health data saved successfully", {
+              id: "create-monitoring",
+            });
 
-      toast.success("Health data saved successfully", {
-        id: "create-monitoring",
-      });
+            setFormData({
+              date: new Date(),
+              glucoseLevel: 0,
+              bloodPressure: 0,
+              cholesterol: 0,
+              uricAcid: 0,
+            });
 
-      setFormData({
-        date: new Date(),
-        glucoseLevel: 0,
-        bloodPressure: 0,
-        cholesterol: 0,
-        uricAcid: 0,
-      });
-
-      setOpen(false);
-
-      queryClient.invalidateQueries({ queryKey: ["monitoringHistory"] });
+            setOpen(false);
+          },
+          onError: (error) => {
+            console.error(error);
+            toast.error("Failed to save health data", {
+              id: "create-monitoring",
+            });
+          }
+        }
+      );
     } catch (error) {
       console.error(error);
       toast.error("Failed to save health data", {
         id: "create-monitoring",
       });
-    } finally {
-      setIsPending(false);
     }
   };
 

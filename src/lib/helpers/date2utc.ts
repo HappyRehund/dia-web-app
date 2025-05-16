@@ -1,3 +1,4 @@
+//src/lib/helpers/date2utc.ts
 // Converts any valid Date or date-string to a UTC Date instance
 export function DateToUTCDate(input: Date | string): Date {
   const date = typeof input === 'string' ? new Date(input) : input;

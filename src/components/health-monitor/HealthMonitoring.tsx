@@ -1,3 +1,4 @@
+//src/components/health-monitor/HealthMonitoring.tsx
 import { getGlucoseStatus, getBloodPressureStatus, getCholesterolStatus, getUricAcidStatus } from "@/lib/helpers/health-monitoring";
 import { Button } from "@/components/ui/button";
 import CreateDailyMonitoringDialog from "./CreateDailyMonitoringDialog";

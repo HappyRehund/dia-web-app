@@ -153,14 +153,14 @@ export default function AddMealDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] max-h-[55vh] flex flex-col">
+      <DialogContent className="sm:max-w-[600px] h-[90vh] md:max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add a Meal</DialogTitle>
         </DialogHeader>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left side: Food search */}
-          <div className="space-y-4 flex flex-col">
+          <div className="space-y-4">
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
               <Input
@@ -171,7 +171,7 @@ export default function AddMealDialog({
               />
             </div>
 
-            <ScrollArea className="h-[320px] border rounded-md">
+            <ScrollArea className="h-[200px] md:h-[320px] border rounded-md">
               <div className="p-4">
                 {isSearching ? (
                   <div className="flex items-center justify-center h-full">

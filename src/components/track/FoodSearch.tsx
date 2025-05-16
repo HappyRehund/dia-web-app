@@ -51,7 +51,7 @@ export default function FoodSearch() {
         value={selectedCategory}
         onValueChange={setSelectedCategory}
       >
-        <TabsList className="grid grid-cols-6 w-full">
+        <TabsList className="grid w-full grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="vegetables">Vegetables</TabsTrigger>
           <TabsTrigger value="cereals">Cereals</TabsTrigger>
@@ -87,19 +87,28 @@ export default function FoodSearch() {
                   </CardDescription>
                 )}
               </CardHeader>
-              <CardContent className="pb-2">
+              <CardContent className="pb-2 grid">
                 <div className="text-sm space-y-1">
                   <div className="font-semibold">{item.calories} kcal</div>
-                  <div className="grid grid-cols-3 gap-2">
-                    <Badge variant={"outline"} className="px-2 py-2 space-x-2 bg-[#484848]">
+                  <div className="grid grid-cols-2 font-xs md:grid-cols-3 gap-2">
+                    <Badge
+                      variant={"outline"}
+                      className="pl-2 py-2 space-x-1 bg-[#484848]"
+                    >
                       <div className="text-xs text-white">Carbs : </div>
                       <div className="text-white">{item.carbs}g</div>
                     </Badge>
-                    <Badge variant={"outline"} className="px-2 py-2 space-x-2 bg-[#96661A]">
+                    <Badge
+                      variant={"outline"}
+                      className="pl-2 py-2 space-x-1 bg-[#96661A]"
+                    >
                       <div className="text-xs text-white">Protein :</div>
                       <div className="text-white">{item.protein}g</div>
                     </Badge>
-                    <Badge variant={"outline"} className="px-2 py-2 space-x-2 bg-[#f9dd29]">
+                    <Badge
+                      variant={"outline"}
+                      className="pl-2 py-2 space-x-1 bg-[#f9dd29]"
+                    >
                       <div className="text-xs text-black">Fat :</div>
                       <div className="text-black">{item.fat}g</div>
                     </Badge>
@@ -163,7 +172,9 @@ function FoodRecipeDialog({
             </div>
             <div className="bg-[#96661A] p-3 rounded-lg">
               <div className="text-sm text-white">Protein</div>
-              <div className="font-semibold text-white">{foodItem.protein}g</div>
+              <div className="font-semibold text-white">
+                {foodItem.protein}g
+              </div>
             </div>
             <div className="bg-[#f9dd29] p-3 rounded-lg">
               <div className="text-sm text-black">Fat</div>

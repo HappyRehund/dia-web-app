@@ -223,11 +223,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://diabetesedb_owner:npg_ngM3u8JvFPeD@ep-mute-unit-a1ys2z6k-pooler.ap-southeast-1.aws.neon.tech/diabetesedb?sslmode=require"
+        "value": null
       }
     }
   },

@@ -2,6 +2,7 @@ import React from "react";
 import Container from "../Container";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -30,9 +31,11 @@ function Hero() {
             spotting early signs of foot ulcers, Diasole keeps your journey
             safe, smart, and supported every step of the way.
           </p>
+          <Link href="/ulcus-detect">
           <Button size={"lg"} className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-xl mt-auto">
             Get Diasole Now
           </Button>
+        </Link>
         </div>
       </div>
     </Container>

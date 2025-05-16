@@ -1,23 +1,28 @@
 import React from "react";
 import Container from "../Container";
 import Image from "next/image";
+import Link from "next/link"; // Add this import
 
 const features = [
   {
     title: "Ulcus detect",
-    icon: "/white-foot.webp", // You'll need to add these icons
+    icon: "/white-foot.webp", 
+    href: "/ulcus-detect",
   },
   {
     title: "Track",
     icon: "/white-track.webp",
+    href: "/track",
   },
   {
     title: "Health monitoring",
     icon: "/white-monitor.webp",
+    href: "/health-monitor",
   },
   {
     title: "DiaHeal",
     icon: "/white-doctor.webp",
+    href: "/dia-doctor",
   },
 ];
 
@@ -33,9 +38,10 @@ function Features() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <div
+              <Link
                 key={index}
-                className="flex flex-col items-center justify-center"
+                href={feature.href}
+                className="flex flex-col items-center justify-center hover:opacity-80 transition-opacity"
               >
                 <div className="bg-white rounded-full mb-3">
                   <Image
@@ -48,7 +54,7 @@ function Features() {
                 <p className="text-white font-semibold text-sm md:text-base">
                   {feature.title}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

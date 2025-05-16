@@ -61,9 +61,9 @@ function HeroHome() {
           {/*DiabetAI*/}
           <button
             onClick={() => setIsChatOpen(true)}
-            className="absolute z-10 right-20 bottom-14 bg-secondary text-white rounded-full py-2 px-4 md:p-6 text-xl flex justify-between items-center shadow-md hover:bg-secondary/90 transition-colors"
+            className="absolute z-50 right-20 bottom-14 bg-secondary text-white rounded-full p-4 md:p-6 text-xl flex justify-between items-center shadow-md hover:bg-secondary/90 transition-colors"
           >
-            <MessageCircleMore size={32} />
+            <MessageCircleMore size={64} />
           </button>
         </div>
 
@@ -83,7 +83,7 @@ function HeroHome() {
                   height={72}
                   className="object-cover"
                 />
-                <span className="mt-1 text-xs lg:text-base font-semibold text-gray-900 group-hover:text-secondary text-center">
+                <span className="mt-1 text-xs lg:text-base font-medium text-gray-900 group-hover:text-secondary text-center">
                   {item.title}
                 </span>
               </a>

@@ -11,7 +11,7 @@ export default async function LandingPage() {
       <Article /> */}
       <Hero />
       <Features />
-      <Doctors  />
+      {/* <Doctors  /> */}
     </>
   );
 }

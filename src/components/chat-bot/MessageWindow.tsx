@@ -17,7 +17,7 @@ export default function MessageWindow({ history }: MessageWindowProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [history]);
   return (
-    <div className="flex-1 p-3 overflow-y-auto">
+    <div className="flex-1 p-3 overflow-y-auto z-50">
       <div className="max-w-3xl mx-auto">
         {history.map((message, index) => {
           const isUser = message.role === "user";

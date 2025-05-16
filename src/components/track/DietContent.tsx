@@ -30,14 +30,14 @@ function DietContent() {
   }
   
   return (
-    <div className="container w-full pb-8 space-y-8">
+    <div className="container w-full pb-8 space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Diet Tracking</h1>
+        <h1 className="text-3xl font-semibold">{formatDate(date)}</h1>
         {/* <DatePicker date={date} setDate={setDate} /> */}
       </div>
 
       <Card>
-        <CardContent className="pt-6">
+        <CardContent className="pt-6 bg-secondary rounded-lg">
           {isLoading ? (
             <div className="space-y-4">
               <Skeleton className="h-6 w-3/4" />
@@ -57,8 +57,8 @@ function DietContent() {
       </Card>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-semibold">Meals for {formatDate(date)}</h2>
-        <Button onClick={() => setIsAddMealDialogOpen(true)}>
+        <h2 className="text-2xl font-semibold">My Meals</h2>
+        <Button onClick={() => setIsAddMealDialogOpen(true)} variant={'outline'} className='bg-black text-white'>
           <Plus className="mr-2 h-4 w-4" /> Add Meal
         </Button>
       </div>

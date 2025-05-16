@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 function Hero() {
   return (
     <Container>
-      <div className="flex flex-col md:flex-row lg:items-center xl:items-stretch justify-between gap-4 md:gap-8 py-8 md:py-16">
+      <div className="flex flex-col md:flex-row items-center xl:items-stretch justify-between gap-4 md:gap-8 py-8 md:py-16">
         {/* Image Hero */}
         <div className="w-full md:w-1/2 h-full">
           <Image

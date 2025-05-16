@@ -68,7 +68,7 @@ function HeroHome() {
         </div>
 
         {/* Right column: ITEMS grid */}
-        <div className="bg-white rounded-xl py-3 md:p-6 my-4 md:my-0 md:w-1/2 flex items-center md:border-2 border-secondary">
+        <div className="bg-transparent rounded-xl py-3 md:p-6 my-4 md:my-0 md:w-1/2 flex items-center">
           <div className="grid grid-cols-4 gap-2 md:gap-6 w-full">
             {ITEMS.map((item) => (
               <a
@@ -79,11 +79,11 @@ function HeroHome() {
                 <Image
                   src={item.image}
                   alt={item.title}
-                  width={48}
-                  height={48}
+                  width={72}
+                  height={72}
                   className="object-cover"
                 />
-                <span className="mt-1 text-xs lg:text-base font-medium text-gray-900 group-hover:text-secondary text-center">
+                <span className="mt-1 text-xs lg:text-base font-semibold text-gray-900 group-hover:text-secondary text-center">
                   {item.title}
                 </span>
               </a>

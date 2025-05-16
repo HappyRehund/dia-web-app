@@ -60,7 +60,7 @@ export default function AddFoodItemDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="bg-black text-white">
           <Plus className="mr-2 h-4 w-4" />
           Add Food Item
         </Button>

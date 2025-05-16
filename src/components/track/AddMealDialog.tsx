@@ -153,7 +153,7 @@ export default function AddMealDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] h-[90vh] md:max-h-[80vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[600px] h-[90vh] md:max-h-[50vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add a Meal</DialogTitle>
         </DialogHeader>

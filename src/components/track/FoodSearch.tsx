@@ -1,7 +1,7 @@
 //src/components/track/FoodSearch.tsx
 "use client";
 import { FoodItem } from "@/generated/prisma";
-import { useDebounce } from "@/hooks/use-debounce";
+import { useDebounce } from "@/hooks/useDebounce";
 import { useFoodItemSearch } from "@/hooks/useDietTracking";
 import { useState } from "react";
 import { Input } from "../ui/input";

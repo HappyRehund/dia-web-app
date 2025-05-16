@@ -1,9 +1,3 @@
-//src/hooks/useDietTracking.ts
-import {
-  addFoodItem,
-  addMeal,
-  removeMeal
-} from "@/app/track/_actions/diet";
 import { FoodItem, Meal, MealCategory } from "@/generated/prisma";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -18,6 +12,81 @@ export interface DietTracking {
   meals: Meal[];
 }
 
+// API Function for adding a meal
+export const addMealApi = async (data: {
+  name: string;
+  category: MealCategory;
+  calories: number;
+  carbs: number;
+  protein: number;
+  fat: number;
+  date: Date | string;
+}) => {
+  const response = await fetch('/api/track/meals', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    if (errorData.code === "AUTH_REQUIRED") {
+      throw new Error("AUTH_REQUIRED");
+    }
+    throw new Error(errorData.error || "Failed to add meal");
+  }
+
+  return response.json();
+};
+
+// API Function for removing a meal
+export const removeMealApi = async (mealId: string) => {
+  const response = await fetch(`/api/track/meals?id=${mealId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    if (errorData.code === "AUTH_REQUIRED") {
+      throw new Error("AUTH_REQUIRED");
+    }
+    throw new Error(errorData.error || "Failed to remove meal");
+  }
+
+  return response.json();
+};
+
+// API Function for adding a food item
+export const addFoodItemApi = async (data: {
+  name: string;
+  category?: string;
+  calories: number;
+  carbs: number;
+  protein: number;
+  fat: number;
+  recipe?: string;
+}) => {
+  const response = await fetch('/api/track/food-items', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    if (errorData.code === "AUTH_REQUIRED") {
+      throw new Error("AUTH_REQUIRED");
+    }
+    throw new Error(errorData.error || "Failed to add food item");
+  }
+
+  return response.json();
+};
+
 export const fetchDailyDietTracking = async (
   date?: Date | string
 ): Promise<DietTracking> => {
@@ -25,9 +94,8 @@ export const fetchDailyDietTracking = async (
   const targetDate = date ? new Date(date) : new Date();
 
   // Format as YYYY-MM-DD for the API parameter
-  // Gunakan langsung tahun, bulan, dan hari dari tanggal lokal
   const year = targetDate.getFullYear();
-  const month = String(targetDate.getMonth() + 1).padStart(2, "0"); // +1 karena getMonth() dimulai dari 0
+  const month = String(targetDate.getMonth() + 1).padStart(2, "0"); // +1 because getMonth() starts from 0
   const day = String(targetDate.getDate()).padStart(2, "0");
   const formattedDate = `${year}-${month}-${day}`;
 
@@ -91,7 +159,7 @@ export const searchFoodItems = async (
 };
 
 export function useDailyDietTracking(date?: Date | string) {
-  // Format tanggal untuk query key
+  // Format date for query key
   const targetDate = date ? new Date(date) : new Date();
   const year = targetDate.getFullYear();
   const month = String(targetDate.getMonth() + 1).padStart(2, "0");
@@ -103,6 +171,7 @@ export function useDailyDietTracking(date?: Date | string) {
     queryFn: () => fetchDailyDietTracking(date),
   });
 }
+
 export function useMealHistory(limit = 7, mealCategory?: MealCategory) {
   return useQuery({
     queryKey: ["mealHistory", limit, mealCategory],
@@ -118,12 +187,12 @@ export function useFoodItemSearch(query: string, limit = 20, category: string) {
   });
 }
 
-//Mutation
+// Mutations
 export function useAddMeal() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: addMeal,
+    mutationFn: addMealApi,
     onSuccess: (_, variables) => {
       const date = new Date(variables.date);
       const year = date.getFullYear();
@@ -143,7 +212,7 @@ export function useRemoveMeal() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: removeMeal,
+    mutationFn: removeMealApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["dietTracking"] });
       queryClient.invalidateQueries({ queryKey: ["mealHistory"] });
@@ -155,9 +224,8 @@ export function useAddFoodItem() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: addFoodItem,
+    mutationFn: addFoodItemApi,
     onSuccess: () => {
-      
       queryClient.invalidateQueries({ queryKey: ["foodItems"] });
       queryClient.invalidateQueries({ queryKey: ["dietTracking"] });
     },

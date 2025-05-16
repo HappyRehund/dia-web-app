@@ -1,3 +1,4 @@
+//src/app/api/track/food-items/route.ts
 import { prisma } from "@/lib/prisma";
 import { stackServerApp } from "@/stack";
 import { NextResponse } from "next/server";
@@ -41,6 +42,40 @@ export async function GET(request: Request) {
     console.error("Error searching food items:", error);
     return NextResponse.json(
       { error: "Failed to search food items" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(request: Request) {
+  const user = await stackServerApp.getUser();
+  if (!user) {
+    return NextResponse.json(
+      { error: "Unauthorized", code: "AUTH_REQUIRED" },
+      { status: 401 }
+    );
+  }
+
+  try {
+    const data = await request.json();
+    
+    const foodItem = await prisma.foodItem.create({
+      data: {
+        name: data.name,
+        category: data.category,
+        calories: data.calories,
+        carbs: data.carbs,
+        protein: data.protein,
+        fat: data.fat,
+        recipe: data.recipe,
+      },
+    });
+    
+    return NextResponse.json(foodItem);
+  } catch (error) {
+    console.error("Error adding food item:", error);
+    return NextResponse.json(
+      { error: "Failed to add food item" },
       { status: 500 }
     );
   }

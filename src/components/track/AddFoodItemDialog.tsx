@@ -13,7 +13,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { useAddFoodItem } from "@/hooks/useDietTracking"
 import { Textarea } from "../ui/textarea"
 
-
 const formSchema = z.object({
   name: z.string().min(1, "Food name is required"),
   category: z.string().optional(),
@@ -51,8 +50,14 @@ export default function AddFoodItemDialog() {
         form.reset()
         setOpen(false)
       },
-      onError: () => {
-        toast.error("Failed to add food item")
+      onError: (error) => {
+        // Handle AUTH_REQUIRED error
+        if (error.message === "AUTH_REQUIRED") {
+          toast.error("Authentication required")
+          // You might want to redirect to login here
+        } else {
+          toast.error("Failed to add food item")
+        }
       }
     })
   }

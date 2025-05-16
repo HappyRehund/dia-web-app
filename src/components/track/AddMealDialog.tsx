@@ -1,7 +1,6 @@
-//src/components/track/AddMealDialog.tsx
 "use client";
 import { FoodItem, MealCategory } from "@/generated/prisma";
-import { useDebounce } from "@/hooks/use-debounce";
+import { useDebounce } from "@/hooks/useDebounce";
 import { useAddMeal } from "@/hooks/useDietTracking";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -39,7 +38,6 @@ const formSchema = z.object({
   fat: z.coerce.number().min(0, "Must be a positive number"),
 });
 
-//type of Form
 type FormValues = z.infer<typeof formSchema>;
 
 interface AddMealDialogProps {
@@ -74,6 +72,12 @@ export default function AddMealDialog({
 
       const response = await fetch(url);
       if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.code === "AUTH_REQUIRED") {
+          toast.error("Authentication required");
+          // Handle auth error - could redirect to login here
+          return;
+        }
         throw new Error("Failed to search food items");
       }
 
@@ -81,6 +85,7 @@ export default function AddMealDialog({
       setFoodItems(data);
     } catch (error) {
       console.error("Error searching food items:", error);
+      toast.error("Failed to search food items");
     } finally {
       setIsSearching(false);
     }
@@ -126,8 +131,13 @@ export default function AddMealDialog({
           form.reset();
           onOpenChange(false);
         },
-        onError: () => {
-          toast.error("Failed to add meal");
+        onError: (error: any) => {
+          if (error.message === "AUTH_REQUIRED") {
+            toast.error("Authentication required");
+            // Handle auth error - could redirect to login here
+          } else {
+            toast.error("Failed to add meal");
+          }
         },
       }
     );

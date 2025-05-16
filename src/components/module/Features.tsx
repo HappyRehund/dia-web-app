@@ -5,9 +5,9 @@ import Link from "next/link"; // Add this import
 
 const features = [
   {
-    title: "Ulcus detect",
+    title: "Ulcer detect",
     icon: "/white-foot.webp", 
-    href: "/ulcus-detect",
+    href: "/ulcer-detect",
   },
   {
     title: "Track",

@@ -31,7 +31,7 @@ function Hero() {
             spotting early signs of foot ulcers, Diasole keeps your journey
             safe, smart, and supported every step of the way.
           </p>
-          <Link href="/ulcus-detect">
+          <Link href="/ulcer-detect">
           <Button size={"lg"} className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-xl mt-auto">
             Get Diasole Now
           </Button>

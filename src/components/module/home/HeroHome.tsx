@@ -10,8 +10,8 @@ import { StackClientApp, useUser } from "@stackframe/stack";
 const ITEMS = [
   {
     image: "/foot.webp",
-    title: "Ulcus Detect",
-    href: "/ulcus-detect",
+    title: "Ulcer Detect",
+    href: "/ulcer-detect",
   },
   {
     image: "/track.webp",

@@ -20,8 +20,8 @@ const NAVBAR_ITEMS = [
     href: "/home",
   },
   {
-    name: "Ulcus Detect",
-    href: "/ulcus-detect",
+    name: "Ulcer Detect",
+    href: "/ulcer-detect",
   },
   {
     name: "Track",

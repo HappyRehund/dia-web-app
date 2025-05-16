@@ -2,20 +2,26 @@
 import React, { useState, useRef } from "react";
 import Container from "../Container";
 import { FileUpload, FileUploadHandlerEvent} from 'primereact/fileupload';
+import { Loader2 } from "lucide-react";
 import axios from "axios";
 
 function Upload() {
     const [predResult, setPredResult] = useState<string>("")
+    const [isLoading, setIsLoading] = useState(false);
     const fileUploadRef = useRef<FileUpload>(null);
 
     const getpred = async (event: FileUploadHandlerEvent) => {
         const formData = new FormData;
         event.files.forEach(file => formData.append("file", file as Blob, file.name));
 
+        setIsLoading(true);
         const res = await axios.post("https://api-ulc.onrender.com/rcsv", formData, {
             headers: { "Content-Type": "multipart/form-data" }
         });
         setPredResult((res.data["Prediction"]));
+        
+        fileUploadRef.current?.clear()
+        setIsLoading(false)
 
         const storeres = await fetch('/api/detection', {
             method: 'POST',
@@ -29,8 +35,6 @@ function Upload() {
         } else {
             console.log("Stored diagnosis successfully")
         }
-
-        fileUploadRef.current?.clear()
     }
 
     return (
@@ -40,15 +44,22 @@ function Upload() {
                     <div className="flex-col flex opacity-0% items-center">
                         <h3 className="text-3xl font-semibold mb-2 mt-10">Upload your Temperature Records</h3>
                         <br></br>
-                        <FileUpload name="uploadcsv"
-                                    ref={fileUploadRef}
-                                    accept="text/csv"
-                                    customUpload
-                                    uploadHandler={getpred}
-                                    mode="basic"
-                                    auto
-                                    chooseLabel="Upload record"
-                        />
+                        {
+                            isLoading ?
+                            <div className="flex flex-row items-center">
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                <h4 className="font-bold">Loading...</h4>
+                            </div> :
+                            <FileUpload name="uploadcsv"
+                                        ref={fileUploadRef}
+                                        accept="text/csv"
+                                        customUpload
+                                        uploadHandler={getpred}
+                                        mode="basic"
+                                        auto
+                                        chooseLabel="Upload record"
+                            />
+                        }
                         <br></br>
                         <br></br>
                         {(predResult == "1") &&

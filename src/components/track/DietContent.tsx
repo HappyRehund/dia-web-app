@@ -71,7 +71,7 @@ function DietContent() {
       )}
       <div className="pt-6">
         <h2 className="text-2xl font-semibold mb-4">Food Library</h2>
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex flex-col text-center text-sm md:text-base md:flex-row justify-between items-center mb-4">
           <div>Search or add custom food items to your library</div>
           <AddFoodItemDialog />
         </div>

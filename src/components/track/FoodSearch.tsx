@@ -50,15 +50,30 @@ export default function FoodSearch() {
         defaultValue="all"
         value={selectedCategory}
         onValueChange={setSelectedCategory}
+        className="w-full"
       >
-        <TabsList className="grid w-full grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="vegetables">Vegetables</TabsTrigger>
-          <TabsTrigger value="cereals">Cereals</TabsTrigger>
-          <TabsTrigger value="protein">Protein</TabsTrigger>
-          <TabsTrigger value="oilsandfats">Oils and fats</TabsTrigger>
-          <TabsTrigger value="beverages">Beverages</TabsTrigger>
-        </TabsList>
+        <div className="w-full overflow-x-auto thin-scrollbar pb-2">
+          <TabsList className="inline-flex w-max h-10 items-center justify-start px-1 gap-2">
+            <TabsTrigger value="all" className="px-3 min-w-16">
+              All
+            </TabsTrigger>
+            <TabsTrigger value="vegetables" className="px-3 min-w-20">
+              Vegetables
+            </TabsTrigger>
+            <TabsTrigger value="cereals" className="px-3 min-w-16">
+              Cereals
+            </TabsTrigger>
+            <TabsTrigger value="protein" className="px-3 min-w-16">
+              Protein
+            </TabsTrigger>
+            <TabsTrigger value="oilsandfats" className="px-3 min-w-24">
+              Oils and fats
+            </TabsTrigger>
+            <TabsTrigger value="beverages" className="px-3 min-w-20">
+              Beverages
+            </TabsTrigger>
+          </TabsList>
+        </div>
       </Tabs>
 
       {isLoading ? (
